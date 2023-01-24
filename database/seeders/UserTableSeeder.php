@@ -26,5 +26,12 @@ class UserTableSeeder extends Seeder
         ]);
 
         $mananger->assignRole('manager');
+
+        User::create([
+            'name' => 'khairy',
+            'email' => 'khairy@gmail.com',
+            'password' => Hash::make('123456')
+        ]);
+
     }
 }

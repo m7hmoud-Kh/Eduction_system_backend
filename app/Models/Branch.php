@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+
+    public function scopeStatus($query)
+    {
+        $query->where('status', 1);
+    }
 }

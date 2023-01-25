@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BranchController;
 
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -17,7 +18,12 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:manager']
+    'middleware' => ['auth','role:manager'],
+    'prefix' => 'branches/'
 ], function () {
-    Route::post('/branches', [BranchController::class, 'store']);
+    Route::get('/', [BranchController::class, 'index']);
+    Route::post('/', [BranchController::class, 'store']);
+    Route::get('{branch}', [BranchController::class, 'show']);
+    Route::post('{branch}', [BranchController::class, 'update']);
+    Route::delete('{branch}', [BranchController::class, 'destory']);
 });

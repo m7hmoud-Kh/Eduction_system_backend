@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\HeadOfManager\HeadStoreRequest;
-use App\Http\Requests\Dashboard\HeadOfManager\HeadUpdateRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Dashboard\HeadOfManager\HeadStoreRequest;
+use App\Http\Requests\Dashboard\HeadOfManager\HeadUpdateRequest;
 
 class HeadBranchController extends Controller
 {
@@ -48,7 +49,12 @@ class HeadBranchController extends Controller
     public function update(HeadUpdateRequest $request, $id)
     {
         $headOfBranch = User::role('head_of_branch')->whereId($id)->first();
-        $headOfBranch->update($request->all());
+        $headOfBranch->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'password_confirmation' => Hash::make($request->password)
+        ]);
         return response()->json([
             'message' => 'Updated',
             'status' => Response::HTTP_NO_CONTENT,

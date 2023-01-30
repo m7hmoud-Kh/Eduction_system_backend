@@ -30,7 +30,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:manager'],
+    'middleware' => ['auth','role:head_of_branch|manager'],
     'prefix' => 'head-branch/'
 ], function () {
     Route::get('/', [HeadBranchController::class, 'index']);

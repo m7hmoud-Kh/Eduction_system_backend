@@ -33,7 +33,7 @@ class BranchController extends Controller
 
     public function show($id)
     {
-        $branch = Branch::whereId($id)->first();
+        $branch = Branch::with('user')->whereId($id)->first();
         if ($branch) {
             return response()->json([
                 'message' => 'ok',

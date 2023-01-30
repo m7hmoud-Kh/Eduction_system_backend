@@ -11,6 +11,11 @@ class Branch extends Model
     protected $guarded = [];
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeStatus($query)
     {
         $query->where('status', 1);

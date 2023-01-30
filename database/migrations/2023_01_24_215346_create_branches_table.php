@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('hot_line');
             $table->text('map_location');
             $table->enum('status', [1, 0])->default(1);
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

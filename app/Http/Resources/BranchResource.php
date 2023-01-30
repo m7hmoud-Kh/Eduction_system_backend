@@ -23,6 +23,7 @@ class BranchResource extends JsonResource
             'map_location' => $this->map_location,
             'status' => $this->status ? 'on' : 'off',
             'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
+            'HeadOfBranch' => new UserResource($this->user)
         ];
     }
 }

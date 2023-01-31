@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Governorate;
 use Faker\Factory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
+            GovernorateSeeder::class,
             BranchSeeder::class,
             UserTableSeeder::class
         ]);

@@ -53,7 +53,7 @@ class UserTableSeeder extends Seeder
             ], [
                 'from' => $faker->time(),
                 'to' => $faker->time(),
-                'salary' => $faker->randomFloat(2, 100)
+                'salary' => rand(100, 5000)
             ]);
         }
 

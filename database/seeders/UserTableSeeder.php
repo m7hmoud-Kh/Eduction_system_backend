@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
 use Faker\Factory;
+use App\Models\User;
+use App\Models\Branch;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,12 +19,9 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'manager']);
-        Role::create(['name' => 'head_of_branch']);
-        Role::create(['name' => 'assistant']);
-
 
         $faker = Factory::create();
+
 
         $mananger = User::create([
             'name' => 'mahmoud',
@@ -31,17 +29,33 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make('123456')
         ]);
         $mananger->assignRole('manager');
-        
 
-        for ($i=0; $i < 8; $i++) {
-            User::create([
-                'name' => $faker->unique()->name(),
-                'email' => $faker->safeEmail(),
+
+        for ($i=0; $i < 3 ; $i++) {
+            $headOfManager = User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique->email,
                 'password' => Hash::make('123456')
             ]);
+            $headOfManager->assignRole('head_of_branch');
         }
 
-
+        for ($i=0; $i < 6 ; $i++) {
+            $assistant = User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique->email,
+                'password' => Hash::make('123456')
+            ]);
+            $assistant->assignRole('assistant');
+            $branch = Branch::status()->pluck('id');
+            $assistant->branch()->attach([
+                $branch[rand(0, count($branch)-1)]
+            ], [
+                'from' => $faker->time(),
+                'to' => $faker->time(),
+                'salary' => rand(100, 5000)
+            ]);
+        }
 
     }
 }

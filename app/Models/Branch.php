@@ -16,6 +16,12 @@ class Branch extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'assistant_branches');
+    }
+
+
     public function scopeStatus($query)
     {
         $query->where('status', 1);

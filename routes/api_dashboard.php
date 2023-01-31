@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AssistantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
@@ -30,7 +31,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:manager'],
+    'middleware' => ['auth','role:head_of_branch|manager'],
     'prefix' => 'head-branch/'
 ], function () {
     Route::get('/', [HeadBranchController::class, 'index']);
@@ -38,5 +39,16 @@ Route::group([
     Route::get('{headofBranch}', [HeadBranchController::class, 'show']);
     Route::post('{headofBranch}', [HeadBranchController::class, 'update']);
     Route::delete('{headofBranch}', [HeadBranchController::class, 'destory']);
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:head_of_branch'],
+], function () {
+    Route::get('assistants', [AssistantController::class, 'index']);
+    Route::post('assistants', [AssistantController::class, 'store']);
+    Route::get('assistants/{id}', [AssistantController::class, 'show']);
+    Route::post('assistants/{id}', [AssistantController::class, 'update']);
+    Route::delete('assistants/{id}', [AssistantController::class, 'destory']);
 
 });

@@ -45,6 +45,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'student' => [
+            'driver' => 'jwt',
+            'provider' => 'students',
+            'hash' => false
+        ]
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -98,6 +108,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'studnets' => [
+            'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

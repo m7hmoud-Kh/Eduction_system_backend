@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Dashboard\Semester;
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SemesterUpdateRequest extends FormRequest
@@ -14,7 +14,7 @@ class SemesterUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class SemesterUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:semesters,id,:' . $this->id],
+            'name' => ['required'],
             'status' => ['required', Rule::in(1, 0)],
             'academic_year_id' => ['required'],
         ];

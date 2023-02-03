@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard\AcademicYear;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -15,7 +15,7 @@ class AcademicYearStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class AcademicYearStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::in(1, 0, 3)],
+            'name' => ['required', Rule::in(1,2,3)],
             'year' => ['required', 'numeric'],
             'branch_id' => ['required']
         ];

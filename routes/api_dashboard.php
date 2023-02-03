@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
 use App\Http\Controllers\Dashboard\AcademicYearController;
 use App\Http\Controllers\Dashboard\SemesterController;
+use App\Http\Controllers\Dashboard\SubjectController;
 
 Route::group([
     'middleware' => 'api',
@@ -75,4 +76,15 @@ Route::group([
     Route::get('semesters/{id}', [SemesterController::class, 'show']);
     Route::post('semesters/{id}', [SemesterController::class, 'update']);
     Route::delete('semesters/{id}', [SemesterController::class, 'destory']);
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('subjects', [SubjectController::class, 'index']);
+    Route::post('subjects', [SubjectController::class, 'store']);
+    Route::get('subjects/{id}', [SubjectController::class, 'show']);
+    Route::post('subjects/{id}', [SubjectController::class, 'update']);
+    Route::delete('subjects/{id}', [SubjectController::class, 'destory']);
 });

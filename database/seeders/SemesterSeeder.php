@@ -23,8 +23,8 @@ class SemesterSeeder extends Seeder
 
         for ($i = 0; $i < 3; $i++) {
             Semester::create([
-                // 'name' => rand(1, 2),
-                // 'status' => rand(0,1),
+                'name' => 2,
+                'status' => 1,
                 'academic_year_id' => $ids[rand(0, count($ids) - 1)]
             ]);
         }

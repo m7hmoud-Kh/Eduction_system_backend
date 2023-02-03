@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Semester;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SemesterResource;
+use App\Http\Requests\Dashboard\Semester\SemesterStoreRequest;
+use App\Http\Requests\Dashboard\Semester\SemesterUpdateRequest;
+
 
 
 
@@ -22,7 +24,7 @@ class SemesterController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(SemesterStoreRequest $request)
     {
         $semester =  Semester::create($request->all());
         return response()->json([
@@ -49,7 +51,7 @@ class SemesterController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(SemesterUpdateRequest $request, $id)
     {
         $semester = Semester::findOrFail($id);
         $semester->update($request->all());

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Matcher\Subset;
 
 class Semester extends Model
 {
@@ -26,4 +27,8 @@ class Semester extends Model
     {
         return $this->belongsTo(AcademicYear::class);
     }
+
+    // public function subjects(){
+    //     return $this->hasMany(Subject::class);
+    // }
 }

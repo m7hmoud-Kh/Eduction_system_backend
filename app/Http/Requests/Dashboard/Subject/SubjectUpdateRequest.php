@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\AcademicYear;
+namespace App\Http\Requests\Dashboard\Subject;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-
-class AcademicYearUpdateRequest extends FormRequest
+class SubjectUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +25,10 @@ class AcademicYearUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'year' => ['required', 'numeric'],
-            'branch_id' => ['required']
+            'name' => ['required', 'unique:subjects,id,:' . $this->id],
+            'status' => ['required', Rule::in(1, 0)],
+            'academic_year_id' => ['required'],
+            'semester_id' => ['required'],
         ];
     }
 }

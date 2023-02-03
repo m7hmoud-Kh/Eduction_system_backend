@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SemesterResource extends JsonResource
+class SubjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class SemesterResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->semesterNameFormat($this->name),
+            'name' => $this->name,
             'status' => $this->status,
             'academic_year_id' => $this->academic_year_id,
+            'semester_id' => $this->semester_id,
         ];
     }
 }

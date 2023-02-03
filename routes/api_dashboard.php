@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
+use App\Http\Controllers\Dashboard\AcademicYearController;
+use App\Http\Controllers\Dashboard\SemesterController;
 
 Route::group([
     'middleware' => 'api',
@@ -51,4 +53,15 @@ Route::group([
     Route::post('assistants/{id}', [AssistantController::class, 'update']);
     Route::delete('assistants/{id}', [AssistantController::class, 'destory']);
 
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('academicYears', [AcademicYearController::class, 'index']);
+    Route::post('academicYears', [AcademicYearController::class, 'store']);
+    Route::get('academicYears/{id}', [AcademicYearController::class, 'show']);
+    Route::post('academicYears/{id}', [AcademicYearController::class, 'update']);
+    Route::delete('academicYears/{id}', [AcademicYearController::class, 'destory']);
 });

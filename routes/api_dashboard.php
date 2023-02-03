@@ -65,3 +65,14 @@ Route::group([
     Route::post('academicYears/{id}', [AcademicYearController::class, 'update']);
     Route::delete('academicYears/{id}', [AcademicYearController::class, 'destory']);
 });
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('semesters', [SemesterController::class, 'index']);
+    Route::post('semesters', [SemesterController::class, 'store']);
+    Route::get('semesters/{id}', [SemesterController::class, 'show']);
+    Route::post('semesters/{id}', [SemesterController::class, 'update']);
+    Route::delete('semesters/{id}', [SemesterController::class, 'destory']);
+});

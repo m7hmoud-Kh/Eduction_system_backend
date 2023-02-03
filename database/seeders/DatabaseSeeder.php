@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             UserTableSeeder::class,
             AcademicYearSeeder::class,
+            SemesterSeeder::class,
         ]);
     }
 }

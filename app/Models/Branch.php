@@ -21,9 +21,19 @@ class Branch extends Model
         return $this->belongsToMany(User::class, 'assistant_branches');
     }
 
+    public function teacher()
+    {
+        return $this->belongsToMany(Teacher::class, 'teacher_branch');
+    }
+
 
     public function scopeStatus($query)
     {
         $query->where('status', 1);
+    }
+
+    public function academicYears()
+    {
+        return $this->hasMany(AcademicYear::class);
     }
 }

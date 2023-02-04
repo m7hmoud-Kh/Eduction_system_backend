@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             ShopSeeder::class,
             CategorySeeder::class
+            TeacherSeeder::class,
+            AcademicYearSeeder::class,
+            SemesterSeeder::class,
+            SubjectSeeder::class
         ]);
     }
 }

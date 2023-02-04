@@ -26,9 +26,10 @@ class DatabaseSeeder extends Seeder
             GovernorateSeeder::class,
             BranchSeeder::class,
             UserTableSeeder::class,
+            TeacherSeeder::class,
             AcademicYearSeeder::class,
             SemesterSeeder::class,
-            SubjectSeeder::class,
+            SubjectSeeder::class
         ]);
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
+use App\Http\Controllers\Dashboard\AcademicYearController;
+use App\Http\Controllers\Dashboard\SemesterController;
+use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 
 Route::group([
@@ -62,4 +65,37 @@ Route::group([
     Route::get('teachers/{id}', [TeacherController::class, 'show']);
     Route::post('teachers/{id}', [TeacherController::class, 'update']);
     Route::delete('teachers/{id}', [TeacherController::class, 'destory']);
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('academicYears', [AcademicYearController::class, 'index']);
+    Route::post('academicYears', [AcademicYearController::class, 'store']);
+    Route::get('academicYears/{id}', [AcademicYearController::class, 'show']);
+    Route::post('academicYears/{id}', [AcademicYearController::class, 'update']);
+    Route::delete('academicYears/{id}', [AcademicYearController::class, 'destory']);
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('semesters', [SemesterController::class, 'index']);
+    Route::post('semesters', [SemesterController::class, 'store']);
+    Route::get('semesters/{id}', [SemesterController::class, 'show']);
+    Route::post('semesters/{id}', [SemesterController::class, 'update']);
+    Route::delete('semesters/{id}', [SemesterController::class, 'destory']);
+});
+
+
+Route::group([
+    'middleware' => ['auth','role:assistant'],
+], function () {
+    Route::get('subjects', [SubjectController::class, 'index']);
+    Route::post('subjects', [SubjectController::class, 'store']);
+    Route::get('subjects/{id}', [SubjectController::class, 'show']);
+    Route::post('subjects/{id}', [SubjectController::class, 'update']);
+    Route::delete('subjects/{id}', [SubjectController::class, 'destory']);
 });

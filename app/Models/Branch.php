@@ -31,4 +31,9 @@ class Branch extends Model
     {
         $query->where('status', 1);
     }
+
+    public function academicYears()
+    {
+        return $this->hasMany(AcademicYear::class);
+    }
 }

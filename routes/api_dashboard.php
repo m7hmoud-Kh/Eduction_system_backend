@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
+use App\Http\Controllers\Dashboard\TeacherController;
 
 Route::group([
     'middleware' => 'api',
@@ -50,5 +51,15 @@ Route::group([
     Route::get('assistants/{id}', [AssistantController::class, 'show']);
     Route::post('assistants/{id}', [AssistantController::class, 'update']);
     Route::delete('assistants/{id}', [AssistantController::class, 'destory']);
+});
 
+
+Route::group([
+    'middleware' => ['auth','role:assistant']
+], function () {
+    Route::get('teachers', [TeacherController::class, 'index']);
+    Route::post('teachers', [TeacherController::class, 'store']);
+    Route::get('teachers/{id}', [TeacherController::class, 'show']);
+    Route::post('teachers/{id}', [TeacherController::class, 'update']);
+    Route::delete('teachers/{id}', [TeacherController::class, 'destory']);
 });

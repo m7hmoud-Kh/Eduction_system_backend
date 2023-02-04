@@ -92,7 +92,7 @@ class AssistantController extends Controller
     {
         if ($assistant = User::role('assistant')->whereId($id)->first()) {
             $assistant->delete();
-            
+
             return response()->json([
                 'message' => 'Deleted',
                 'status' => Response::HTTP_NO_CONTENT

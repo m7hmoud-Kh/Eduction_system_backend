@@ -49,6 +49,11 @@ return [
             'root' => public_path('Student_image/'),
         ],
 
+        'teacher_image' => [
+            'driver' => 'local',
+            'root' => public_path('Teacher_image/'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

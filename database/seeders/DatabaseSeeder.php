@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             UserTableSeeder::class,
             ShopSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
             TeacherSeeder::class,
             AcademicYearSeeder::class,
             SemesterSeeder::class,

@@ -68,7 +68,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function branch()
     {
-        return $this->belongsToMany(Branch::class, 'assistant_branches');
+        return $this->belongsToMany(Branch::class, 'assistant_branches')        ->withPivot('from','to','salary');
+    }
+
+    public function headBranch()
+    {
+        return $this->hasMany(Branch::class, 'user_id');
     }
 
 }

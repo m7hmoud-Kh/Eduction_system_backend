@@ -16,7 +16,7 @@ class HeadBranchController extends Controller
 
     public function index()
     {
-        $headOfBranch = User::role('head_of_branch')->get();
+        $headOfBranch = User::role('head_of_branch')->with('headBranch')->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,

@@ -114,7 +114,7 @@ Route::group([
 
 Route::group([
     'middleware' => ['auth','role:assistant']
-    
+
 ], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::post('categories', [CategoryController::class, 'store']);

@@ -2,50 +2,43 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Shop;
+use App\Models\Note;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\Dashboard\Shop\ShopStoreRequest;
-use App\Http\Requests\Dashboard\Shop\ShopUpdateRequest;
-use App\Http\Resources\ShopResource;
+use App\Http\Resources\NoteResource;
+use App\Http\Requests\Dashboard\Note\NoteStoreRequest;
+use App\Http\Requests\Dashboard\Note\NoteUpdateRequest;
 
-class ShopController extends Controller
+class NoteController extends Controller
 {
-
     public function index()
     {
-        $allShops = Shop::all();
-
+        $allNotes = Note::all();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => ShopResource::collection($allShops)
+            'data' => NoteResource::collection($allNotes)
         ]);
     }
 
-
-
-    public function store(ShopStoreRequest $request)
+    public function store(NoteStoreRequest $request)
     {
-        $shop = Shop::create($request->all());
-
+        $note =  Note::create($request->all());
         return response()->json([
             'message' => 'Created Successfully',
             'status' => Response::HTTP_CREATED,
-            'data' => new ShopResource($shop)
+            'data' => new NoteResource($note)
         ]);
     }
 
     public function show($id)
     {
-
-        $shop = Shop::whereId($id)->first();
-        if ($shop) {
+        $note = Note::whereId($id)->first();
+        if ($note) {
             return response()->json([
                 'message' => 'ok',
                 'status' => Response::HTTP_OK,
-                'data' => new ShopResource($shop)
+                'data' => new NoteResource($note)
             ]);
         } else {
             return response()->json([
@@ -55,23 +48,20 @@ class ShopController extends Controller
         }
     }
 
-
-
-    public function update(ShopUpdateRequest $request, $id)
+    public function update(NoteUpdateRequest $request, $id)
     {
-        $shop = Shop::findOrFail($id);
-        $shop->update($request->all());
+        $note = Note::findOrFail($id);
+        $note->update($request->all());
         return response()->json([
             'message' => 'Update',
             'status' => Response::HTTP_NO_CONTENT
         ]);
     }
 
-
-    public function destroy($id)
+    public function destory($id)
     {
-        $shop = Shop::findOrFail($id);
-        $shop->delete();
+        $note = Note::findOrFail($id);
+        $note->delete();
         return response()->json([
             'message' => 'Delete',
             'status' => Response::HTTP_NO_CONTENT,

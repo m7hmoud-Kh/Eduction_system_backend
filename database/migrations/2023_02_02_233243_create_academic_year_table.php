@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->enum('name',[1,2,3]);
-            $table->integer("year");
+            $table->enum('name', [1, 2, 3]);
+            $table->year("year");
             $table->foreignId("branch_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('academic_year');
+        Schema::dropIfExists('academic_years');
     }
 };

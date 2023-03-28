@@ -28,7 +28,7 @@ class SemesterStoreRequest extends FormRequest
         return [
             'name' => ['required', Rule::in(1, 2)],
             'status' => ['required', Rule::in(1, 0)],
-            'academic_year_id' => ['required'],
+            'academic_year_id' => ['required', 'numeric'],
         ];
     }
 }

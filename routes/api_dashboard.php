@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\Dashboard\AssistantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
-use App\Http\Controllers\Dashboard\BranchController;
-use App\Http\Controllers\Dashboard\HeadBranchController;
+use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\ShopController;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\AcademicYearController;
-use App\Http\Controllers\Dashboard\SemesterController;
+use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\SemesterController;
+use App\Http\Controllers\Dashboard\AssistantController;
+use App\Http\Controllers\Dashboard\ClassRoomController;
+use App\Http\Controllers\Dashboard\AttachmentController;
+use App\Http\Controllers\Dashboard\HeadBranchController;
+use App\Http\Controllers\Dashboard\AppointmentController;
+use App\Http\Controllers\Dashboard\AcademicYearController;
 
 Route::group([
     'middleware' => 'api',
@@ -25,7 +29,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:manager'],
+    'middleware' => ['auth', 'role:manager'],
     'prefix' => 'branches/'
 ], function () {
     Route::get('/', [BranchController::class, 'index']);
@@ -37,7 +41,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:head_of_branch|manager'],
+    'middleware' => ['auth', 'role:head_of_branch|manager'],
     'prefix' => 'head-branch/'
 ], function () {
     Route::get('/', [HeadBranchController::class, 'index']);
@@ -49,7 +53,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:head_of_branch'],
+    'middleware' => ['auth', 'role:head_of_branch'],
 ], function () {
     Route::get('assistants', [AssistantController::class, 'index']);
     Route::post('assistants', [AssistantController::class, 'store']);
@@ -60,7 +64,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:assistant']
+    'middleware' => ['auth', 'role:assistant']
 ], function () {
     Route::get('teachers', [TeacherController::class, 'index']);
     Route::post('teachers', [TeacherController::class, 'store']);
@@ -71,7 +75,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:assistant'],
+    'middleware' => ['auth', 'role:assistant'],
 ], function () {
     Route::get('academicYears', [AcademicYearController::class, 'index']);
     Route::post('academicYears', [AcademicYearController::class, 'store']);
@@ -82,7 +86,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:assistant'],
+    'middleware' => ['auth', 'role:assistant'],
 ], function () {
     Route::get('semesters', [SemesterController::class, 'index']);
     Route::post('semesters', [SemesterController::class, 'store']);
@@ -93,7 +97,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','role:assistant'],
+    'middleware' => ['auth', 'role:assistant'],
 ], function () {
     Route::get('subjects', [SubjectController::class, 'index']);
     Route::post('subjects', [SubjectController::class, 'store']);
@@ -103,7 +107,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['auth','role:assistant']
+    'middleware' => ['auth', 'role:assistant']
 ], function () {
     Route::get('shops', [ShopController::class, 'index']);
     Route::post('shops', [ShopController::class, 'store']);
@@ -113,8 +117,8 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['auth','role:assistant']
-    
+    'middleware' => ['auth', 'role:assistant']
+
 ], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::post('categories', [CategoryController::class, 'store']);
@@ -123,3 +127,46 @@ Route::group([
     Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
 });
 
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::get('classRooms', [ClassRoomController::class, 'index']);
+    Route::post('classRooms', [ClassRoomController::class, 'store']);
+    Route::get('classRooms/{id}', [ClassRoomController::class, 'show']);
+    Route::post('classRooms/{id}', [ClassRoomController::class, 'update']);
+    Route::delete('classRooms/{id}', [ClassRoomController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::get('notes', [NoteController::class, 'index']);
+    Route::post('notes', [NoteController::class, 'store']);
+    Route::get('notes/{id}', [NoteController::class, 'show']);
+    Route::post('notes/{id}', [NoteController::class, 'update']);
+    Route::delete('notes/{id}', [NoteController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::get('attachment', [AttachmentController::class, 'index']);
+    Route::post('attachment', [AttachmentController::class, 'store']);
+    Route::get('attachment/{id}', [AttachmentController::class, 'show']);
+    Route::post('attachment/{id}', [AttachmentController::class, 'update']);
+    Route::delete('attachment/{id}', [AttachmentController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::get('appointment', [AppointmentController::class, 'index']);
+    Route::post('appointment', [AppointmentController::class, 'store']);
+    Route::get('appointment/{id}', [AppointmentController::class, 'show']);
+    Route::post('appointment/{id}', [AppointmentController::class, 'update']);
+    Route::delete('appointment/{id}', [AppointmentController::class, 'destory']);
+});

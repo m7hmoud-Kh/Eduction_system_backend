@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Semester;
+namespace App\Http\Requests\Dashboard\ClassRoom;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SemesterUpdateRequest extends FormRequest
+class ClassRoomStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,12 @@ class SemesterUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'unique:class_rooms'],
+            'price' => ['required', 'numeric'],
             'status' => ['required', Rule::in(1, 0)],
-            'academic_year_id' => ['required', 'numeric'],
+            'max_capacity' => ['required', 'numeric'],
+            'registration_deadline' => ['required', 'date_format:Y-m-d H:i:s'],
+            'start_date' => ['required', 'date_format:Y-m-d H:i:s']
         ];
     }
 }

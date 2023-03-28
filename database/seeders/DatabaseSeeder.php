@@ -31,7 +31,11 @@ class DatabaseSeeder extends Seeder
             TeacherSeeder::class,
             AcademicYearSeeder::class,
             SemesterSeeder::class,
-            SubjectSeeder::class
+            SubjectSeeder::class,
+            ClassRoomSeeder::class,
+            NoteSeeder::class,
+            AttachmentSeeder::class,
+            AppointmentSeeder::class
         ]);
     }
 }

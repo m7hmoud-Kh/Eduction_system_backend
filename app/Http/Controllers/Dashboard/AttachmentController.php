@@ -2,50 +2,43 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Shop;
+use App\Models\Attachment;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\Dashboard\Shop\ShopStoreRequest;
-use App\Http\Requests\Dashboard\Shop\ShopUpdateRequest;
-use App\Http\Resources\ShopResource;
+use App\Http\Resources\AttachmentResource;
+use App\Http\Requests\Dashboard\Attachment\AttachmentStoreRequest;
+use App\Http\Requests\Dashboard\Attachment\AttachmentUpdateRequest;
 
-class ShopController extends Controller
+class AttachmentController extends Controller
 {
-
     public function index()
     {
-        $allShops = Shop::all();
-
+        $allattachments = Attachment::all();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => ShopResource::collection($allShops)
+            'data' => AttachmentResource::collection($allattachments)
         ]);
     }
 
-
-
-    public function store(ShopStoreRequest $request)
+    public function store(AttachmentStoreRequest $request)
     {
-        $shop = Shop::create($request->all());
-
+        $attachment =  Attachment::create($request->all());
         return response()->json([
             'message' => 'Created Successfully',
             'status' => Response::HTTP_CREATED,
-            'data' => new ShopResource($shop)
+            'data' => new AttachmentResource($attachment)
         ]);
     }
 
     public function show($id)
     {
-
-        $shop = Shop::whereId($id)->first();
-        if ($shop) {
+        $attachment = Attachment::whereId($id)->first();
+        if ($attachment) {
             return response()->json([
                 'message' => 'ok',
                 'status' => Response::HTTP_OK,
-                'data' => new ShopResource($shop)
+                'data' => new AttachmentResource($attachment)
             ]);
         } else {
             return response()->json([
@@ -55,23 +48,20 @@ class ShopController extends Controller
         }
     }
 
-
-
-    public function update(ShopUpdateRequest $request, $id)
+    public function update(AttachmentUpdateRequest $request, $id)
     {
-        $shop = Shop::findOrFail($id);
-        $shop->update($request->all());
+        $attachment = Attachment::findOrFail($id);
+        $attachment->update($request->all());
         return response()->json([
             'message' => 'Update',
             'status' => Response::HTTP_NO_CONTENT
         ]);
     }
 
-
-    public function destroy($id)
+    public function destory($id)
     {
-        $shop = Shop::findOrFail($id);
-        $shop->delete();
+        $attachment = Attachment::findOrFail($id);
+        $attachment->delete();
         return response()->json([
             'message' => 'Delete',
             'status' => Response::HTTP_NO_CONTENT,

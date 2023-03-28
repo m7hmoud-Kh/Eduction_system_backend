@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('semesters', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->enum("name", [1, 2]);
-            $table->enum("status", [0, 1]);
-            $table->foreignId("academic_year_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('day');
+            $table->dateTime('from');
+            $table->dateTime('to');
+            $table->foreignId('class_room_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semesters');
+        Schema::dropIfExists('appointments');
     }
 };

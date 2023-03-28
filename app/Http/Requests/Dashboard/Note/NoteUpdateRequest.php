@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Semester;
+namespace App\Http\Requests\Dashboard\Note;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SemesterUpdateRequest extends FormRequest
+class NoteUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,8 @@ class SemesterUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'status' => ['required', Rule::in(1, 0)],
-            'academic_year_id' => ['required', 'numeric'],
+            'description' => ['required', 'string'],
+            'class_room_id' => ['required', 'numeric']
         ];
     }
 }

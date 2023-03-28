@@ -15,13 +15,13 @@ class AcademicYearSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $ids = Branch::pluck('id');
+        $BranchesIds = Branch::pluck('id');
 
         for ($i = 0; $i < 3; $i++) {
             AcademicYear::create([
-                'name' => rand(1,3),
-                'year' => $faker->numberBetween(2010, 2024),
-                'branch_id' => $ids[rand(0, count($ids) - 1)]
+                'name' => rand(1, 3),
+                'year' => $faker->year(),
+                'branch_id' => $BranchesIds->random()
             ]);
         }
     }

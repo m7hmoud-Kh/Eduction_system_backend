@@ -19,13 +19,13 @@ class SemesterSeeder extends Seeder
      */
     public function run()
     {
-        $ids = AcademicYear::pluck('id');
+        $academicYearIds = AcademicYear::pluck('id');
 
         for ($i = 0; $i < 3; $i++) {
             Semester::create([
                 'name' => 2,
                 'status' => 1,
-                'academic_year_id' => $ids[rand(0, count($ids) - 1)]
+                'academic_year_id' => $academicYearIds->random()
             ]);
         }
     }

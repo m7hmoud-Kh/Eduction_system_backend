@@ -14,12 +14,37 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
-            'role' => $this->roles
-        ];
+        if ($this->roles[0]->name=='head_of_branch') {
+            return [
+                'id' => $this->id,
+                'name' => $this->name,
+                'email' => $this->email,
+                'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
+                'role_id' => $this->roles[0]->id,
+                'role_name' => $this->roles[0]->name,
+                'branchHead_manager' => $this->headBranch,
+            ];
+        }else if ($this->roles[0]->name=='assistant') {
+            return [
+                'id' => $this->id,
+                'name' => $this->name,
+                'email' => $this->email,
+                'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
+                'role_id' => $this->roles[0]->id,
+                'role_name' => $this->roles[0]->name,
+                'branch_id_assistant' => $this->branch[0]->id ,
+                'exter_info' => $this->branch[0]->pivot
+            ];
+        } else {
+            return [
+                'id' => $this->id,
+                'name' => $this->name,
+                'email' => $this->email,
+                'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
+                'role_id' => $this->roles[0]->id,
+                'role_name' => $this->roles[0]->name,
+            ];
+        }
+
     }
 }

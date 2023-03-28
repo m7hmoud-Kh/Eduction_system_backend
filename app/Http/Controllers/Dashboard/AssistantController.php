@@ -16,13 +16,18 @@ class AssistantController extends Controller
 {
     public function index()
     {
-        $assistants = User::with('branch')->role('assistant')->get();
+        $user = User::with('headBranch')->where('id', Auth::user()->id)->first();
+        $assistants = User::whereHas('branch', function ($q) use ($user) {
+            $q->where('branches.id', $user->headBranch[0]->id);
+        })->role('assistant')->get();
+
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
             'data' => UserResource::collection($assistants)
         ]);
     }
+
 
     public function store(HeadStoreRequest $request)
     {
@@ -40,7 +45,6 @@ class AssistantController extends Controller
             'to' => $request->to,
             'salary' =>$request->salary
         ]);
-
         return response()->json([
             'message' => 'Created',
             'status' => Response::HTTP_CREATED,

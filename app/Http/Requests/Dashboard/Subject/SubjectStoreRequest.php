@@ -27,7 +27,6 @@ class SubjectStoreRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'status' => ['required', Rule::in(1, 0)],
             'academic_year_id' => ['required'],
             'semester_id' => ['required'],
         ];

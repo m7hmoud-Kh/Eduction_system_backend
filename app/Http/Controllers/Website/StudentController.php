@@ -10,6 +10,8 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\Student\StudentUpdateRequest;
+use App\Http\Resources\GovernorateResource;
+use App\Models\Governorate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -158,4 +160,15 @@ class StudentController extends Controller
         ]);
     }
 
+    public function getAllGov()
+    {
+        $allGov = Governorate::orderBy('id')->get();
+
+        if ($allGov) {
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data' => GovernorateResource::collection($allGov)
+            ]);
+        }
+    }
 }

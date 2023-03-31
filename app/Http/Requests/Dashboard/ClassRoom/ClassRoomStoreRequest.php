@@ -27,7 +27,8 @@ class ClassRoomStoreRequest extends FormRequest
         return [
             'name' => ['required', 'unique:class_rooms'],
             'price' => ['required', 'numeric'],
-            'status' => ['required', Rule::in(1, 0)],
+            'status' => ['required', Rule::in(1, 0), 'numeric'],
+            'prerequisite_exam' => [Rule::in(1, 0), 'numeric'],
             'max_capacity' => ['required', 'numeric'],
             'registration_deadline' => ['required', 'date_format:Y-m-d H:i:s'],
             'start_date' => ['required', 'date_format:Y-m-d H:i:s']

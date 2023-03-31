@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Attachment;
 use Illuminate\Http\Response;
+use App\Http\trait\Fileable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\AttachmentResource;
 use App\Http\Requests\Dashboard\Attachment\AttachmentStoreRequest;
 use App\Http\Requests\Dashboard\Attachment\AttachmentUpdateRequest;
 
 class AttachmentController extends Controller
 {
+    use Fileable;
     public function index()
     {
         $allattachments = Attachment::all();
+        $allattachments = Attachment::with('classRoom')->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
@@ -23,7 +27,11 @@ class AttachmentController extends Controller
 
     public function store(AttachmentStoreRequest $request)
     {
-        $attachment =  Attachment::create($request->all());
+        $newFile = $this->uploadFile($request->description, $request->name, 'Attachments');
+        $attachment = Attachment::create(array_merge(
+            $request->all(),
+            ['name' => $newFile]
+        ));
         return response()->json([
             'message' => 'Created Successfully',
             'status' => Response::HTTP_CREATED,
@@ -50,21 +58,46 @@ class AttachmentController extends Controller
 
     public function update(AttachmentUpdateRequest $request, $id)
     {
-        $attachment = Attachment::findOrFail($id);
-        $attachment->update($request->all());
-        return response()->json([
-            'message' => 'Update',
-            'status' => Response::HTTP_NO_CONTENT
-        ]);
+        $attachment = Attachment::find($id);
+
+        if ($attachment) {
+            if ($request->file('name')) {
+                Storage::disk('attachment_name')->delete($attachment->name);
+                $newFile = $this->uploadFile($request->description, $request->name, 'Attachments');
+                $attachment->update(array_merge(
+                    $request->all(),
+                    ['name' => $newFile]
+                ));
+            } else {
+                $attachment->update($request->all());
+            }
+            return response()->json([
+                'message' => 'Updated',
+                'status' => Response::HTTP_NO_CONTENT
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
     }
 
     public function destory($id)
     {
-        $attachment = Attachment::findOrFail($id);
-        $attachment->delete();
-        return response()->json([
-            'message' => 'Delete',
-            'status' => Response::HTTP_NO_CONTENT,
-        ]);
+        $attachment = Attachment::find($id);
+        if ($attachment) {
+            Storage::disk('attachment_name')->delete($attachment->name);
+            $attachment->delete();
+            return response()->json([
+                'message' => 'Deleted',
+                'status' => Response::HTTP_NO_CONTENT
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
     }
 }

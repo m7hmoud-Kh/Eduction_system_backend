@@ -36,6 +36,7 @@ class AcademicYearController extends Controller
     public function show($id)
     {
         $academicYear = AcademicYear::whereId($id)->first();
+
         if ($academicYear) {
             return response()->json([
                 'message' => 'ok',

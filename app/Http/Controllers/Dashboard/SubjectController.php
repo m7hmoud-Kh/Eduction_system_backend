@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Subject;
-use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\Subject\SubjectStoreRequest;
 use App\Http\Requests\Dashboard\Subject\SubjectUpdateRequest;
 use Illuminate\Http\Response;

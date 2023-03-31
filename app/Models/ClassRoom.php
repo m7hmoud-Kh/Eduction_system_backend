@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Note;
-use App\Models\Student;
-use App\Models\Attachment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +18,9 @@ class ClassRoom extends Model
         'max_capacity',
         'min_grade',
         'min_selected',
+        'branch_id',
+        'subject_id',
+        'teacher_id'
     ];
 
     public function student()
@@ -28,17 +28,32 @@ class ClassRoom extends Model
         return $this->belongsToMany(Student::class, 'classroom_student');
     }
 
-    public function note()
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+    public function notes()
     {
         return $this->hasMany(Note::class);
     }
 
-    public function attachment()
+    public function attachments()
     {
         return $this->hasMany(Attachment::class);
     }
 
-    public function appointment()
+    public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }

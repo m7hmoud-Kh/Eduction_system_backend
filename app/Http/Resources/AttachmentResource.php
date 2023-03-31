@@ -18,7 +18,7 @@ class AttachmentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'class_room_id' => $this->class_room_id,
+            'classroom_name' => $this->classRoom->name
         ];
     }
 }

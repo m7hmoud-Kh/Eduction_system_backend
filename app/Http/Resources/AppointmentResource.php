@@ -17,9 +17,9 @@ class AppointmentResource extends JsonResource
         return [
             'id' => $this->id,
             'day' => $this->day,
-            'from' => $this->from,
-            'to' => $this->to,
-            'class_room_id' => $this->class_room_id
+            'from' => $this->formatHoursAndMinutes($this->from),
+            'to' => $this->formatHoursAndMinutes($this->to),
+            'classroom_name' => $this->classRoom->name
         ];
     }
 }

@@ -21,6 +21,42 @@ class ClassRoomController extends Controller
         ]);
     }
 
+    public function getClassroomsByTeacherID($id)
+    {
+        $classRooms = ClassRoom::with('teacher')->where('teacher_id', $id)->get();
+
+        if ($classRooms) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => ClassRoomResource::collection($classRooms)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
+    public function getClassroomsBySubjectID($id)
+    {
+        $classRooms = ClassRoom::with('subject')->where('subject_id', $id)->get();
+
+        if ($classRooms) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' =>  ClassRoomResource::collection($classRooms)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
     public function store(ClassRoomStoreRequest $request)
     {
         $classRoom =  ClassRoom::create($request->all());

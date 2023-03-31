@@ -38,9 +38,8 @@ class Student extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function classRoom()
+    public function studentClassrooms()
     {
         return $this->belongsToMany(ClassRoom::class, 'classroom_student');
     }
-
 }

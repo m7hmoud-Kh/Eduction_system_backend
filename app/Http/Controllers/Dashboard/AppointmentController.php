@@ -31,23 +31,6 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function show($id)
-    {
-        $appointment = Appointment::whereId($id)->first();
-        if ($appointment) {
-            return response()->json([
-                'message' => 'ok',
-                'status' => Response::HTTP_OK,
-                'data' => new AppointmentResource($appointment)
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'Not Found',
-                'status' => Response::HTTP_NOT_FOUND
-            ]);
-        }
-    }
-
     public function update(AppointmentUpdateRequest $request, $id)
     {
         $appointment = Appointment::findOrFail($id);

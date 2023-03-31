@@ -134,6 +134,8 @@ Route::group([
     Route::get('classRooms', [ClassRoomController::class, 'index']);
     Route::post('classRooms', [ClassRoomController::class, 'store']);
     Route::get('classRooms/{id}', [ClassRoomController::class, 'show']);
+    Route::get('classrooms.get_by_teacher_id/{id}', [ClassRoomController::class, 'getClassroomsByTeacherID']);
+    Route::get('classrooms.get_by_subject_id/{id}', [ClassRoomController::class, 'getClassroomsBySubjectID']);
     Route::post('classRooms/{id}', [ClassRoomController::class, 'update']);
     Route::delete('classRooms/{id}', [ClassRoomController::class, 'destory']);
 });

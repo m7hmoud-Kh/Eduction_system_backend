@@ -2,15 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appointment extends Model
 {
     use HasFactory;
-    protected $fillable = ['day', 'from', 'to', 'class_room_id'];
+    protected $fillable = [
+        'day',
+        'from',
+        'to',
+        'class_room_id'
+    ];
 
-    public function classRooms()
+
+    function formatHoursAndMinutes($dateString)
+    {
+        $date = new DateTime($dateString);
+        return $date->format('H:i');
+    }
+
+    public function classRoom()
     {
         return $this->belongsTo(ClassRoom::class);
     }

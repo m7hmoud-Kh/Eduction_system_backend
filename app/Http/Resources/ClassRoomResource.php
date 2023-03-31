@@ -18,13 +18,16 @@ class ClassRoomResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'prerequisite_exam' => $this->prerequisite_exam,
-            'status' => $this->status,
-            'registration_deadline' => date_format($this->created_at, 'Y m-d h:i:s'),
-            'start_date' => date_format($this->created_at, 'Y m-d h:i:s'),
+            'prerequisite_exam' => $this->prerequisite_exam ? 'On' : 'Off',
+            'status' => $this->status ? 'On' : 'Off',
+            'registration_deadline' => $this->registration_deadline,
+            'start_date' => $this->start_date,
             'max_capacity' => $this->max_capacity,
             'min_grade' => $this->min_grade,
             'min_selected' => $this->min_selected,
+            'branch_name' => $this->branch->name,
+            'subject_name' => $this->subject->name,
+            'teacher_name' => $this->teacher->name
         ];
     }
 }

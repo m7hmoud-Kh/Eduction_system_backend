@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\AcademicYear;
@@ -23,9 +22,8 @@ class SemesterSeeder extends Seeder
 
         for ($i = 0; $i < 3; $i++) {
             Semester::create([
-                'name' => 2,
-                'status' => 1,
-                'academic_year_id' => $academicYearIds->random()
+                'name' => 1,
+                'academic_year_id' => $academicYearIds[rand(0, count($academicYearIds) - 1)]
             ]);
         }
     }

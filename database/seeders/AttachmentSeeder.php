@@ -6,7 +6,6 @@ use App\Models\Attachment;
 use Faker\Factory;
 use App\Models\ClassRoom;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AttachmentSeeder extends Seeder
 {
@@ -22,9 +21,9 @@ class AttachmentSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Attachment::create([
-                'name' => $faker->name(),
-                'description' => $faker->unique()->sentence(),
-                'class_room_id' => $classRoomsIds->random()
+                'name' => 'file.pdf',
+                'description' => $faker->unique()->word(),
+                'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)]
             ]);
         }
     }

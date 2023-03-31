@@ -18,7 +18,7 @@ class AcademicYearResource extends JsonResource
             'id' => $this->id,
             'name' => $this->yearNameFormat($this->name),
             'year' => $this->year,
-            'branch_id' => $this->branch_id,
+            'branch_name' => $this->branch->name
         ];
     }
 }

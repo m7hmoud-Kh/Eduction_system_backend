@@ -24,9 +24,9 @@ class AppointmentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'day' => ['required', 'date'],
-            'from' => ['required', 'date_format:Y-m-d H:i:s'],
-            'to' => ['required', 'date_format:Y-m-d H:i:s'],
+            'day' => ['required'],
+            'from' => ['required', 'date_format:H:i:s'],
+            'to' => ['required', 'date_format:H:i:s'],
             'class_room_id' => ['required', 'numeric']
         ];
     }

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\Semester;
@@ -25,9 +24,8 @@ class SubjectSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             Subject::create([
                 'name' => $faker->name(),
-                'status' => 1,
                 'academic_year_id' => $academicYearsIds[rand(0, count($academicYearsIds) - 1)],
-                'semester_id' => $semestersIds[rand(0, count($semestersIds) - 1)],
+                'semester_id' => $semestersIds[rand(0, count($semestersIds) - 1)]
             ]);
         }
     }

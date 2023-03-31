@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
             $table->enum("name", [1, 2]);
-            $table->enum("status", [0, 1]);
+            $table->enum("status", [0, 1])->default(1);
             $table->foreignId("academic_year_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

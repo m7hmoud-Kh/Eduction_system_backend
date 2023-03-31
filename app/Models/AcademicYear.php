@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AcademicYear extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'year', 'branch_id'];
+    protected $fillable = [
+        'name',
+        'year',
+        'branch_id'
+    ];
 
     public function yearNameFormat($yearName)
     {
@@ -24,7 +28,7 @@ class AcademicYear extends Model
         }
     }
 
-    public function branches()
+    public function branch()
     {
         return $this->belongsTo(Branch::class);
     }

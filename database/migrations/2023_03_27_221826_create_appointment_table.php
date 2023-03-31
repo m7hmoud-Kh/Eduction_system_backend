@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
-            $table->dateTime('from');
-            $table->dateTime('to');
+            $table->string('day');
+            $table->time('from');
+            $table->time('to');
             $table->foreignId('class_room_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

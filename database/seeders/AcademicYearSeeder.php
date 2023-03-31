@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\Branch;
@@ -21,7 +20,7 @@ class AcademicYearSeeder extends Seeder
             AcademicYear::create([
                 'name' => rand(1, 3),
                 'year' => $faker->year(),
-                'branch_id' => $BranchesIds->random()
+                'branch_id' => $BranchesIds[rand(0, count($BranchesIds)-1)]
             ]);
         }
     }

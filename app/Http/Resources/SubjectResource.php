@@ -14,12 +14,29 @@ class SubjectResource extends JsonResource
      */
     public function toArray($request)
     {
+        $academic_year_name = $this->academicYear->name;
+        $semester_name = $this->semester->name;
+
+        if ($academic_year_name == '1') {
+            $academic_year_name = "الصف الاول الثانوى";
+        } elseif ($academic_year_name == '2') {
+            $academic_year_name = "الصف الثانى الثانوى";
+        } elseif ($academic_year_name == '3') {
+            $academic_year_name = "الصف الثالث الثانوى";
+        }
+
+        if ($semester_name == '1') {
+            $semester_name = "الفصل الدراسى الاول";
+        } elseif ($semester_name == '2') {
+            $semester_name = "الفصل الدراسى الثانى";
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'status' => $this->status,
-            'academic_year_id' => $this->academic_year_id,
-            'semester_id' => $this->semester_id,
+            'status' => $this->status ? 'On' : 'Off',
+            // 'image' => $this->image,
+            'academic_year' => $academic_year_name,
+            'semester' => $semester_name
         ];
     }
 }

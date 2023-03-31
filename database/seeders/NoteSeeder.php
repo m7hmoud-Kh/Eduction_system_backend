@@ -6,7 +6,6 @@ use Faker\Factory;
 use App\Models\Note;
 use App\Models\ClassRoom;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class NoteSeeder extends Seeder
 {
@@ -23,7 +22,7 @@ class NoteSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             Note::create([
                 'description' => $faker->unique()->sentence(),
-                'class_room_id' => $classRoomsIds->random()
+                'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)]
             ]);
         }
     }

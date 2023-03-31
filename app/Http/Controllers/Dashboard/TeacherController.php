@@ -11,12 +11,13 @@ use App\Http\Resources\TeacherResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Teacher\TeacherStoreRequest;
 use App\Http\Requests\Dashboard\Teacher\TeacherUpdateRequest;
+use App\Http\trait\Branchable;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
-    use Imageable;
+    use Imageable, Branchable;
     public function index()
     {
         $teachers = Teacher::all();
@@ -29,8 +30,7 @@ class TeacherController extends Controller
     }
     public function store(TeacherStoreRequest $request)
     {
-        $assistant = User::with('branch')->role('assistant')->whereId(auth()->user()->id)->first();
-        $branchId = $assistant->branch()->first()->id;
+        $branchId = $this->get_branch_id_by_auth_user();
         $newImage =
         $this->insertImage($request->nick_name, $request->avatar, 'Teacher_image');
         $teacher = Teacher::create(array_merge(
@@ -106,5 +106,25 @@ class TeacherController extends Controller
                 'status' => Response::HTTP_NOT_FOUND
             ]);
         }
+    }
+
+    public function all_teacher_in_branch($branchId)
+    {
+        $allTeacher = Teacher::WhereHas('branch', function ($q) use ($branchId) {
+            $q->where('branches.id', $branchId);
+        })->with('branch')->get();
+
+        if ($allTeacher) {
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data' => TeacherResource::collection($allTeacher)
+            ]);
+        }else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+
     }
 }

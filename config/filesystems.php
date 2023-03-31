@@ -59,6 +59,11 @@ return [
             'root' => public_path('Attachments/'),
         ],
 
+        'subject_image' => [
+            'driver' => 'local',
+            'root' => public_path('Subject_image/'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

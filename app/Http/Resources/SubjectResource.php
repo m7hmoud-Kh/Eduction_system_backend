@@ -34,7 +34,8 @@ class SubjectResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'status' => $this->status ? 'On' : 'Off',
-            // 'image' => $this->image,
+            'image' => $this->image,
+            'branch_id' => $this->branch->name,
             'academic_year' => $academic_year_name,
             'semester' => $semester_name
         ];

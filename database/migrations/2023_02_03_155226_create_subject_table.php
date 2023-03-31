@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->enum("status", [0, 1])->default(1);
+            $table->string('image');
             $table->foreignId("academic_year_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId("semester_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId("branch_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

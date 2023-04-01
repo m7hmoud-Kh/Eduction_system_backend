@@ -19,7 +19,7 @@ class NoteSeeder extends Seeder
         $faker = Factory::create();
         $classRoomsIds = ClassRoom::pluck('id');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             Note::create([
                 'description' => $faker->unique()->sentence(),
                 'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)]

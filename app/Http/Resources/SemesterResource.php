@@ -18,7 +18,7 @@ class SemesterResource extends JsonResource
             'id' => $this->id,
             'name' => $this->semesterNameFormat($this->name),
             'status' => $this->status ? 'On' : 'Off',
-            'academic_year' => $this->academicYear->yearNameFormat($this->name)
+            'academic_year' => $this->academicYear->yearNameFormat($this->academicYear->year, $this->academicYear->name),
         ];
     }
 }

@@ -23,6 +23,24 @@ class AcademicYearController extends Controller
         ]);
     }
 
+    public function getAcademicYearByBranchId($branchId)
+    {
+        $academicYears = AcademicYear::with('branch')->where('branch_id', $branchId)->get();
+
+        if ($academicYears) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' =>  AcademicYearResource::collection($academicYears)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
     public function store(AcademicYearStoreRequest $request)
     {
         $academicYear =  AcademicYear::create($request->all());

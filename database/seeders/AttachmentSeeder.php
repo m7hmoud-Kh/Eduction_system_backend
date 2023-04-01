@@ -19,7 +19,7 @@ class AttachmentSeeder extends Seeder
         $faker = Factory::create();
         $classRoomsIds = ClassRoom::pluck('id');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             Attachment::create([
                 'name' => 'file.pdf',
                 'description' => $faker->unique()->word(),

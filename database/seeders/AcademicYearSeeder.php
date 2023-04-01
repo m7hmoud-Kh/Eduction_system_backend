@@ -16,7 +16,7 @@ class AcademicYearSeeder extends Seeder
         $faker = Factory::create();
         $BranchesIds = Branch::pluck('id');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             AcademicYear::create([
                 'name' => rand(1, 3),
                 'year' => $faker->year(),

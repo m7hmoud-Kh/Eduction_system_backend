@@ -16,7 +16,7 @@ class AppointmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'day' => $this->day,
+            'day' => $this->dayNameFormate($this->day),
             'from' => $this->formatHoursAndMinutes($this->from),
             'to' => $this->formatHoursAndMinutes($this->to),
             'classroom_name' => $this->classRoom->name

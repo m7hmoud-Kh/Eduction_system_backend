@@ -26,6 +26,24 @@ class SubjectController extends Controller
         ]);
     }
 
+    public function getSubjectByBranchId($branchId)
+    {
+        $Subjects = Subject::with('branch')->where('branch_id', $branchId)->get();
+
+        if ($Subjects) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' =>  SubjectResource::collection($Subjects)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
     public function store(SubjectStoreRequest $request)
     {
         $branchId = $this->get_branch_id_by_auth_user();

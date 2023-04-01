@@ -20,9 +20,9 @@ class SemesterSeeder extends Seeder
     {
         $academicYearIds = AcademicYear::pluck('id');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             Semester::create([
-                'name' => 1,
+                'name' => rand(1, 2),
                 'academic_year_id' => $academicYearIds[rand(0, count($academicYearIds) - 1)]
             ]);
         }

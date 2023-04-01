@@ -25,7 +25,7 @@ class SubjectSeeder extends Seeder
         $semestersIds = Semester::pluck('id');
         $BranchId = Branch::pluck('id');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Subject::create([
                 'name' => $faker->sentence(2),
                 'status' => '1',

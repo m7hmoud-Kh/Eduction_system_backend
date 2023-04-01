@@ -21,9 +21,26 @@ class ClassRoomController extends Controller
         ]);
     }
 
-    public function getClassroomsByTeacherID($id)
+    public function getClassroomsByBranchId($branchId)
     {
-        $classRooms = ClassRoom::with('teacher')->where('teacher_id', $id)->get();
+        $classRooms = ClassRoom::with('branch')->where('branch_id', $branchId)->get();
+
+        if ($classRooms) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => ClassRoomResource::collection($classRooms)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+    public function getClassroomsByTeacherId($teacherId)
+    {
+        $classRooms = ClassRoom::with('teacher')->where('teacher_id', $teacherId)->get();
 
         if ($classRooms) {
             return response()->json([
@@ -39,9 +56,9 @@ class ClassRoomController extends Controller
         }
     }
 
-    public function getClassroomsBySubjectID($id)
+    public function getClassroomsBySubjectId($subjectId)
     {
-        $classRooms = ClassRoom::with('subject')->where('subject_id', $id)->get();
+        $classRooms = ClassRoom::with('subject')->where('subject_id', $subjectId)->get();
 
         if ($classRooms) {
             return response()->json([

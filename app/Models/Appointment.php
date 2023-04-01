@@ -23,6 +23,28 @@ class Appointment extends Model
         return $date->format('H:i');
     }
 
+    public function dayNameFormate($day)
+    {
+        switch ($day) {
+            case 1:
+                return 'السبت';
+            case 2:
+                return 'الأحد';
+            case 3:
+                return 'الأثنين';
+            case 4:
+                return 'الثلاثاء';
+            case 5:
+                return 'الأربعاء';
+            case 6:
+                return 'الخميس';
+            case 7:
+                return 'الجمعه';
+            default:
+                break;
+        }
+    }
+
     public function classRoom()
     {
         return $this->belongsTo(ClassRoom::class);

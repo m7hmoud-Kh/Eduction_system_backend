@@ -21,6 +21,23 @@ class NoteController extends Controller
         ]);
     }
 
+    public function getNotesByClassroomId($classroomId)
+    {
+        $notes = Note::with('classRoom')->where('class_room_id', $classroomId)->get();
+        if ($notes) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => NoteResource::collection($notes)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
     public function store(NoteStoreRequest $request)
     {
         $note =  Note::create($request->all());

@@ -25,6 +25,23 @@ class AttachmentController extends Controller
         ]);
     }
 
+    public function getAttachmentByClassroomId($classroomId)
+    {
+        $attachments = Attachment::with('classRoom')->where('class_room_id', $classroomId)->get();
+        if ($attachments) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => AttachmentResource::collection($attachments)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
+    }
+
     public function store(AttachmentStoreRequest $request)
     {
         $newFile = $this->uploadFile($request->description, $request->name, 'Attachments');

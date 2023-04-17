@@ -27,7 +27,6 @@ class AppointmentUpdateRequest extends FormRequest
             'day' => ['required'],
             'from' => ['required', 'date_format:H:i:s'],
             'to' => ['required', 'date_format:H:i:s'],
-            'class_room_id' => ['required', 'numeric']
         ];
     }
 }

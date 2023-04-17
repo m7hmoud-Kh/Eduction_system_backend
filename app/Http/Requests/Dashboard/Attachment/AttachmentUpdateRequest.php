@@ -26,7 +26,6 @@ class AttachmentUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'file', 'mimes:pdf'],
             'description' => ['required', 'string'],
-            'class_room_id' => ['required', 'numeric']
         ];
     }
 }

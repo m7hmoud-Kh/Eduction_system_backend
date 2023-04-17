@@ -25,7 +25,6 @@ class NoteUpdateRequest extends FormRequest
     {
         return [
             'description' => ['required', 'string'],
-            'class_room_id' => ['required', 'numeric']
         ];
     }
 }

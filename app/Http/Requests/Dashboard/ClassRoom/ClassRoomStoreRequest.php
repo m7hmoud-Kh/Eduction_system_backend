@@ -30,6 +30,8 @@ class ClassRoomStoreRequest extends FormRequest
             'status' => ['required', Rule::in(1, 0), 'numeric'],
             'prerequisite_exam' => [Rule::in(1, 0), 'numeric'],
             'max_capacity' => ['required', 'numeric'],
+            'min_grade' => ['required_if:prerequisite_exam,1'],
+            'min_selected' => ['required_if:prerequisite_exam,1'],
             'registration_deadline' => ['required', 'date_format:Y-m-d H:i:s'],
             'start_date' => ['required', 'date_format:Y-m-d H:i:s']
         ];

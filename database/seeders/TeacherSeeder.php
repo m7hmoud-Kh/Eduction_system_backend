@@ -26,7 +26,7 @@ class TeacherSeeder extends Seeder
                 'phone_number' => '01' . $faker->numberBetween(111111111, 999999999),
                 'avatar' => 'avatar.png'
             ]);
+            $teacher->branch()->attach($branchId[rand(0, count($branchId) - 1)]);
         }
-        $teacher->branch()->attach($branchId[rand(0, count($branchId) - 1)]);
     }
 }

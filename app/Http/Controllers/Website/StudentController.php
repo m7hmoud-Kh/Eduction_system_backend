@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\Student\StudentUpdateRequest;
 use App\Http\Resources\GovernorateResource;
+use App\Http\Resources\StudentResource;
 use App\Models\Governorate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,7 +73,7 @@ class StudentController extends Controller
         ));
         return response()->json([
             'message' => 'Student successfully registered',
-            'student' => $studnet
+            'student' => new StudentResource($studnet)
         ], Response::HTTP_CREATED);
     }
 
@@ -156,7 +157,7 @@ class StudentController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth('student')->user()
+            'user' => new StudentResource(auth('student')->user())
         ]);
     }
 

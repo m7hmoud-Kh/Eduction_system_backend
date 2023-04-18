@@ -120,4 +120,27 @@ class ClassRoomController extends Controller
             'status' => Response::HTTP_NO_CONTENT,
         ]);
     }
+
+    public function getClassRoomsByBranchIdAndTeacherId($branchId, $teacherId)
+    {
+        $allClassRooms = ClassRoom::status()->branchId($branchId)->teacherId($teacherId)->get();
+
+
+        return response()->json([
+            'message' => 'Ok',
+            'status' => Response::HTTP_OK,
+            'data' => ClassRoomResource::collection($allClassRooms)
+        ]);
+    }
+
+    public function getClassRoomsByBranchIdAndSubjectId($branchId, $subjectId)
+    {
+        $allClassRooms = ClassRoom::status()->branchId($branchId)->subjectId($subjectId)->get();
+
+        return response()->json([
+            'message' => 'Ok',
+            'status' => Response::HTTP_OK,
+            'data' => ClassRoomResource::collection($allClassRooms)
+        ]);
+    }
 }

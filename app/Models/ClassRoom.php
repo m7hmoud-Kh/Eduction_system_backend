@@ -57,4 +57,25 @@ class ClassRoom extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+
+
+    public function scopeStatus($query)
+    {
+        return $query->where('status', '1');
+    }
+
+    public function scopeBranchId($query, $branchId)
+    {
+        return $query->where('branch_id', $branchId);
+    }
+
+    public function scopeTeacherId($query, $teacherId)
+    {
+        return $query->where('teacher_id', $teacherId);
+    }
+
+    public function scopeSubjectId($query, $subjectId)
+    {
+        return $query->where('subject_id', $subjectId);
+    }
 }

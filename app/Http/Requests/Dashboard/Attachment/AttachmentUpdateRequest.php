@@ -24,7 +24,7 @@ class AttachmentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'file', 'mimes:pdf'],
+            'name' => ['file', 'mimes:pdf'],
             'description' => ['required', 'string'],
         ];
     }

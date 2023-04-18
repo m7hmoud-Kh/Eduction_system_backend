@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             ClassRoomSeeder::class,
             NoteSeeder::class,
             AttachmentSeeder::class,
-            AppointmentSeeder::class
+            AppointmentSeeder::class,
+            StudentSeeder::class
         ]);
     }
 }

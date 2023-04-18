@@ -42,4 +42,46 @@ class Student extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(ClassRoom::class, 'classroom_student');
     }
+
+
+    public function yearNameFormat($name)
+    {
+        switch ($name) {
+            case 1:
+                return "الصف الاول الثانوى";
+            case 2:
+                return  "الصف الثانى الثانوى";
+            case 3:
+                return  "الصف الثالث الثانوى";
+            default:
+                break;
+        }
+    }
+
+    public function divisionNameFormat($name)
+    {
+
+        switch ($name) {
+            case '1':
+                $name = "عام";
+                break;
+            case '2':
+                $name =  "علمي";
+                break;
+            case '3':
+                $name = "ادبي";
+                break;
+            case '4':
+                $name = "علمي رياضه";
+                break;
+            case '5':
+                $name =  "علمي علوم";
+                break;
+            default:
+                break;
+        }
+        return $name;
+    }
+
+
 }

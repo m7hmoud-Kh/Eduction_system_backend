@@ -19,6 +19,7 @@ class TeacherResource extends JsonResource
             'name' => $this->name,
             'nick_name' => $this->nick_name,
             'phone_number' => $this->phone_number,
+            'avatar' => 'Teacher_image/' . $this->avatar,
             'created_at' => date_format($this->created_at, 'Y m-d h:i:s')
         ];
     }

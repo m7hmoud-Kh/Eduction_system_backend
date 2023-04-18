@@ -24,7 +24,7 @@ class UserResource extends JsonResource
                 'role_name' => $this->roles[0]->name,
                 'branchHead_manager' => $this->headBranch,
             ];
-        }else if ($this->roles[0]->name=='assistant') {
+        }elseif ($this->roles[0]->name=='assistant') {
             return [
                 'id' => $this->id,
                 'name' => $this->name,

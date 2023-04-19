@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\ClassRoomController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
+use App\Http\Controllers\Website\ClassRoomStudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\StudentController;
@@ -24,6 +25,8 @@ Route::get('/classrooms-subject/{branch_id}/{subject_id}', [
     ClassRoomController::class, 'getClassRoomsByBranchIdAndSubjectId'
 ]);
 
+Route::get('get-remaining-students/{classroom_id}', [ClassRoomStudentController::class, 'remainingStudents']);
+
 Route::group([
     'middleware' => 'auth:student'
 ], function () {
@@ -31,4 +34,8 @@ Route::group([
     Route::post('/logout', [StudentController::class, 'logout']);
     Route::get('/students/refresh', [StudentController::class, 'refresh']);
     Route::post('/students/{id}', [StudentController::class, 'update']);
+
+    Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
+
+    Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
 });

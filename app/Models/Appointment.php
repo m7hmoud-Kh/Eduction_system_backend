@@ -17,7 +17,7 @@ class Appointment extends Model
     ];
 
 
-    function formatHoursAndMinutes($dateString)
+    public function formatHoursAndMinutes($dateString)
     {
         $date = new DateTime($dateString);
         return $date->format('H:i');
@@ -48,5 +48,10 @@ class Appointment extends Model
     public function classRoom()
     {
         return $this->belongsTo(ClassRoom::class);
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'appointment_id');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Attendance;
+use DateTimeImmutable;
 use App\Models\Governorate;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +19,8 @@ class StudentResource extends JsonResource
     public function toArray($request)
     {
         $gov = Governorate::find($this->governorate_id);
-        return [
+        $date = new DateTimeImmutable($this->created_at);
+        $studentInfo = [
             'id' => $this->id ,
             'f_name' => $this->f_name,
             'm_name' => $this->m_name,
@@ -31,8 +34,16 @@ class StudentResource extends JsonResource
             'division' => [$this->division, $this->divisionNameFormat($this->division)],
             'national_id_card' => 'Subject_image/'.$this->national_id_card,
             'governorate_id' => [$this->governorate_id, $gov->name] ,
-            'created_at' => date_format($this->created_at, 'Y m-d h:i:s'),
+            'created_at' => $date->format('Y-m-d h:i:s')
         ];
+
+        if ($this->attendance[0]->attendance_date) {
+            return array_merge($studentInfo, [
+                'attendances' => new AttendanceResource($this->attendance[0])
+            ]);
+        }else {
+            return $studentInfo;
+        }
 
     }
 }

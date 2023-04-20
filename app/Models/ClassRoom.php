@@ -11,7 +11,7 @@ class ClassRoom extends Model
     const REQISTERED = '3';
 
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'price',
@@ -31,6 +31,11 @@ class ClassRoom extends Model
     {
         return $this->belongsToMany(Student::class, 'classroom_student')->withPivot('status')->withTimestamps();
 
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
     }
 
 

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassRoom extends Model
 {
+    const WAITING = '0';
+    const REQISTERED = '3';
+
     use HasFactory;
+
     protected $fillable = [
         'name',
         'price',
@@ -25,8 +29,16 @@ class ClassRoom extends Model
 
     public function student()
     {
-        return $this->belongsToMany(Student::class, 'classroom_student');
+        return $this->belongsToMany(Student::class, 'classroom_student')->withPivot('status')->withTimestamps();
+
     }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+
 
     public function branch()
     {

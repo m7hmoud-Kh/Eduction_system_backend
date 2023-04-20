@@ -16,6 +16,8 @@ use App\Http\Controllers\Dashboard\AttachmentController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\AcademicYearController;
+use App\Http\Controllers\Dashboard\AttendanceController;
+use App\Http\Controllers\Website\ClassRoomStudentController;
 
 Route::group([
     'middleware' => 'api',
@@ -142,6 +144,18 @@ Route::group([
     Route::get('classrooms_get_by_subject_id/{id}', [ClassRoomController::class, 'getClassroomsBySubjectId']);
     Route::post('classRooms/{id}', [ClassRoomController::class, 'update']);
     Route::delete('classRooms/{id}', [ClassRoomController::class, 'destory']);
+
+    Route::post('/accept-student-classroom', [
+        ClassRoomStudentController::class, 'AcceptStudentByAssistant'
+    ]);
+
+    Route::post('/accept-all-student-classroom', [
+        ClassRoomStudentController::class, 'AcceptAllStudentByAssistant'
+    ]);
+
+    Route::get('/all-students-classroom/{classroom_id}/{appointment_id}', [
+        ClassRoomStudentController::class, 'getAllStudentInClassRoom'
+    ]);
 });
 
 Route::group([
@@ -179,3 +193,12 @@ Route::group([
     Route::post('appointment/{id}', [AppointmentController::class, 'update']);
     Route::delete('appointment/{id}', [AppointmentController::class, 'destory']);
 });
+
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::post('/attendance', [AttendanceController::class, 'attendanceStudent']);
+});
+

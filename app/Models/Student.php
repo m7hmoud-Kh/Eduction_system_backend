@@ -18,6 +18,20 @@ class Student extends Authenticatable implements JWTSubject
 
 
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -38,9 +52,14 @@ class Student extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function studentClassrooms()
+    public function classRoom()
     {
-        return $this->belongsToMany(ClassRoom::class, 'classroom_student');
+        return $this->belongsToMany(ClassRoom::class, 'classroom_student')->withPivot('status')->withTimestamps();
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'student_id');
     }
 
 
@@ -83,5 +102,20 @@ class Student extends Authenticatable implements JWTSubject
         return $name;
     }
 
+
+    public function FormatStatusAttendance($val)
+    {
+        switch ($val) {
+            case '0':
+                return "غايب";
+            case '1':
+                return "حاضر";
+            case '2':
+                return "حضور ودفع المال";
+            default:
+                # code...
+                break;
+        }
+    }
 
 }

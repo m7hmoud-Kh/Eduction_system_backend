@@ -3,20 +3,23 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\ExamController;
 use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\ShopController;
 use App\Http\Controllers\Dashboard\BranchController;
+use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\AssistantController;
 use App\Http\Controllers\Dashboard\ClassRoomController;
 use App\Http\Controllers\Dashboard\AttachmentController;
+use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\AcademicYearController;
-use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
 
 Route::group([
@@ -200,5 +203,38 @@ Route::group([
 
 ], function () {
     Route::post('/attendance', [AttendanceController::class, 'attendanceStudent']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::post('exams', [ExamController::class, 'store']);
+    Route::get('exams/{id}', [ExamController::class, 'show']);
+    Route::get('exams_get_by_classroom_id/{id}', [ExamController::class, 'getExamsByClassroomId']);
+    Route::post('exams/{id}', [ExamController::class, 'update']);
+    Route::delete('exams/{id}', [ExamController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::post('questions', [QuestionController::class, 'store']);
+    Route::get('questions/{id}', [QuestionController::class, 'show']);
+    Route::get('questions_get_by_exam_id/{id}', [QuestionController::class, 'getQuestionsByExamId']);
+    Route::post('questions/{id}', [QuestionController::class, 'update']);
+    Route::delete('questions/{id}', [QuestionController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant']
+
+], function () {
+    Route::post('options', [OptionController::class, 'store']);
+    Route::get('options/{id}', [OptionController::class, 'show']);
+    Route::get('options_get_by_question_id/{id}', [OptionController::class, 'getOptionsByQuestionId']);
+    Route::post('options/{id}', [OptionController::class, 'update']);
+    Route::delete('options/{id}', [OptionController::class, 'destory']);
 });
 

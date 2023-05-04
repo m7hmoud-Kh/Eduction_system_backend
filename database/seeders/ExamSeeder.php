@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
+use App\Models\ClassRoom;
+use App\Models\Exam;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ExamSeeder extends Seeder
 {
@@ -14,6 +17,17 @@ class ExamSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $faker = Factory::create();
+        $classRoomsIds = ClassRoom::pluck('id');
+
+        for ($i = 0; $i < 50; $i++) {
+            Exam::create([
+                'name' => $faker->name,
+                'description' => $faker->text,
+                'start_at' => $faker->dateTime(),
+                'end_at' => $faker->dateTime(),
+                'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)]
+            ]);
+        }
     }
 }

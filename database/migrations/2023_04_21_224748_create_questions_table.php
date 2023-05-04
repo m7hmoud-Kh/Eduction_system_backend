@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('question');
-            $table->enum('type', ['0', '1', '2'])->comment("
+            $table->enum('type', [0, 1, 2])->comment("
             0 => single choice
             1 => multiple choice
             2 => T/F");

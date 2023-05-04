@@ -36,7 +36,10 @@ class DatabaseSeeder extends Seeder
             NoteSeeder::class,
             AttachmentSeeder::class,
             AppointmentSeeder::class,
-            StudentSeeder::class
+            StudentSeeder::class,
+            ExamSeeder::class,
+            QuestionSeeder::class,
+            OptionSeeder::class
         ]);
     }
 }

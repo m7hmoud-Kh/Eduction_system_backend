@@ -24,7 +24,7 @@ class ClassRoomSeeder extends Seeder
         $subjectsIds = Subject::pluck('id');
         $teachersIds = Teacher::pluck('id');
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             ClassRoom::create([
                 'name' => $faker->name(),
                 'price' => $faker->numberBetween(10, 200),

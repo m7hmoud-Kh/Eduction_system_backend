@@ -20,9 +20,12 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
-            $table->enum('status', ['0', '1'])->comment("
+            $table->boolean('status')->default(0)->comment("
             0 => unPulished
             1 => Puplished");
+            $table->enum('type', [0, 1])->default(0)->comment("
+            0 => normalExam
+            1 => prerequestExam");
             $table->timestamps();
         });
     }

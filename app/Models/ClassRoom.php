@@ -38,8 +38,6 @@ class ClassRoom extends Model
         return $this->hasMany(Attendance::class);
     }
 
-
-
     public function branch()
     {
         return $this->belongsTo(Branch::class);
@@ -70,6 +68,10 @@ class ClassRoom extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function exams()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 
     public function scopeStatus($query)
     {

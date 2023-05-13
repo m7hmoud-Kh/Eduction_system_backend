@@ -16,10 +16,10 @@ class OptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'option' => $this->option,
-            'is_correct' => $this->is_correct,
             'exam_name' => $this->exam->name,
             'question' => $this->question->question,
+            'option' => $this->option,
+            'is_correct' => $this->is_correct,
         ];
     }
 }

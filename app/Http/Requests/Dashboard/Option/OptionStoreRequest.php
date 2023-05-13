@@ -24,8 +24,8 @@ class OptionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'option' => ['required', 'string', 'max:100', 'distinct'],
-            'is_correct' => ['required', 'boolean'],
+            'option' => ['required', 'max:100', 'distinct'],
+            // 'is_correct' => ['required', 'boolean'],
             'exam_id' => ['required', 'numeric'],
             'question_id' => ['required', 'numeric']
         ];

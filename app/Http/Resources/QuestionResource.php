@@ -16,12 +16,12 @@ class QuestionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'question' => $this->question,
+            'exam_name' => $this->exam->name,
             'type' => $this->formateQuestionType($this->type),
+            'question' => $this->question,
             'point' => $this->point,
             'image' => 'Question_image/' . $this->image,
-            'explanation' => $this->explanation,
-            'exam_name' => $this->exam->name
+            'explanation' => $this->explanation
         ];
     }
 }

@@ -231,10 +231,7 @@ Route::group([
     'middleware' => ['auth', 'role:assistant']
 
 ], function () {
-    Route::post('options', [OptionController::class, 'store']);
-    Route::get('options/{id}', [OptionController::class, 'show']);
+    Route::post('options/{questionId}', [OptionController::class, 'store']);
     Route::get('options_get_by_question_id/{id}', [OptionController::class, 'getOptionsByQuestionId']);
-    Route::post('options/{id}', [OptionController::class, 'update']);
-    Route::delete('options/{id}', [OptionController::class, 'destory']);
+    Route::delete('options/{questionId}', [OptionController::class, 'destory']);
 });
-

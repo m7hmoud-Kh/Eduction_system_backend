@@ -34,4 +34,15 @@ class Exam extends Model
         $date = new DateTime($examDate);
         return $date->format('Y-m-d H:i');
     }
+
+    public function scopeStatus($query)
+    {
+        $query->where('status', '1');
+    }
+
+    public function scopeType($query)
+    {
+        $query->where('status', '1');
+    }
+
 }

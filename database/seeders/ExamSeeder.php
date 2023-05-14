@@ -19,6 +19,7 @@ class ExamSeeder extends Seeder
     {
         $faker = Factory::create();
         $classRoomsIds = ClassRoom::pluck('id');
+        $status  = ['0','1'];
 
         for ($i = 0; $i < 50; $i++) {
             Exam::create([
@@ -26,7 +27,8 @@ class ExamSeeder extends Seeder
                 'description' => $faker->text,
                 'start_at' => $faker->dateTime(),
                 'end_at' => $faker->dateTime(),
-                'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)]
+                'class_room_id' => $classRoomsIds[rand(0, count($classRoomsIds) - 1)],
+                // 'status' =>  $status[rand(0, count($status) - 1)],
             ]);
         }
     }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\ClassRoomController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
+use App\Http\Controllers\Website\ExamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\StudentController;
@@ -38,4 +39,14 @@ Route::group([
     Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
 
     Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
+});
+
+//student in classRoom must check if student already registered in classRoom Or not
+
+Route::group([
+    'middleware' => ['auth:student','registered_student']
+], function () {
+    Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
+    Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
+    Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
 });

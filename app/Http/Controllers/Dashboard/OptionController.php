@@ -30,27 +30,6 @@ class OptionController extends Controller
         }
     }
 
-    // public function store(OptionStoreRequest $request, $questionId)
-    // {
-
-    //     $question = Question::findOrFail($questionId);
-    //     $data = $request->json()->all();
-    //     dd($data);
-    //     die;
-    //     $options = collect($data)->map(function ($option) use ($question) {
-    //         return new Option([
-    //             'option' => $option['option'],
-    //             'is_correct' => $option['is_correct'],
-    //             'exam_id' => $option['exam_id'],
-    //             'question_id' => $question->id,
-    //         ]);
-    //     });
-    //     $question->option()->saveMany($options);
-    //     return response()->json([
-    //         'message' => 'Created Successfully',
-    //         'status' => Response::HTTP_CREATED,
-    //     ]);
-    // }
     public function store(OptionStoreRequest $request, $questionId)
     {
         $question = Question::findOrFail($questionId);

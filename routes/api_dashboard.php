@@ -20,7 +20,7 @@ use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Dashboard\HeadBranchController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\AcademicYearController;
-use App\Http\Controllers\Website\ClassRoomStudentController;
+use App\Http\Controllers\Dashboard\ClassRoomStudentController;
 
 Route::group([
     'middleware' => 'api',
@@ -158,6 +158,10 @@ Route::group([
 
     Route::get('/all-students-classroom/{classroom_id}/{appointment_id}', [
         ClassRoomStudentController::class, 'getAllStudentInClassRoom'
+    ]);
+
+    Route::get('/all-students-classroom-waiting/{classroom_id}', [
+        ClassRoomStudentController::class, 'getAllStudentWaitingInClassRoom'
     ]);
 });
 

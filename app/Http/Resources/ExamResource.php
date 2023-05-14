@@ -21,7 +21,7 @@ class ExamResource extends JsonResource
             'start_at' => $this->examDateFormate($this->start_at),
             'end_at' => $this->examDateFormate($this->end_at),
             'status' => $this->status ? 'Puplished' : 'unPulished',
-            'type' => $this->type ? 'Normal Exam' : 'Prerequest Exam',
+            'type' => $this->type ? 'Prerequest Exam':'Normal Exam' ,
             'classroom_name' => $this->classRoom->name
         ];
     }

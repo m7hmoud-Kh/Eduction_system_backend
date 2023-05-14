@@ -14,14 +14,22 @@ class QuestionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $question = [
             'id' => $this->id,
             'exam_name' => $this->exam->name,
             'type' => $this->formateQuestionType($this->type),
             'question' => $this->question,
             'point' => $this->point,
             'image' => 'Question_image/' . $this->image,
-            'explanation' => $this->explanation
+            'explanation' => $this->explanation,
         ];
+
+        if ($this->options) {
+            return array_merge($question, [
+                'options' => OptionResource::collection($this->options)
+            ]);
+        }else {
+            return $question;
+        }
     }
 }

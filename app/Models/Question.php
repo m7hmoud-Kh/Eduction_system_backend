@@ -22,7 +22,7 @@ class Question extends Model
         return $this->belongsTo(Exam::class);
     }
 
-    public function option()
+    public function options()
     {
         return $this->hasMany(Option::class);
     }

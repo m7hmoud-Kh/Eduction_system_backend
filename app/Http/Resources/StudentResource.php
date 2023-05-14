@@ -37,7 +37,7 @@ class StudentResource extends JsonResource
             'created_at' => $date->format('Y-m-d h:i:s')
         ];
 
-        if ($this->attendance[0]->attendance_date) {
+        if (isset($this->attendance[0]->attendance_date)) {
             return array_merge($studentInfo, [
                 'attendances' => new AttendanceResource($this->attendance[0])
             ]);

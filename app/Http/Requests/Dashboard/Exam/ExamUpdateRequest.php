@@ -28,7 +28,7 @@ class ExamUpdateRequest extends FormRequest
             'name' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string', 'max:200'],
             'start_at' => ['required', 'date_format:Y-m-d H:i'],
-            'end_at' => ['required', 'date_format:Y-m-d H:i'],
+            'end_at' => ['required', 'date_format:Y-m-d H:i','after:start_at'],
             'status' => ['required', Rule::in(1, 0)],
             'type' => ['required', Rule::in(1, 0)],
         ];

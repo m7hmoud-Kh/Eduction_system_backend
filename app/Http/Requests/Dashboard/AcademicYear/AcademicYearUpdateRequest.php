@@ -26,9 +26,11 @@ class AcademicYearUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'year' => ['required', 'numeric'],
-            'branch_id' => ['required']
+
+            'name' => ['required', Rule::in(1, 2, 3)],
+            'year' => ['required', 'date_format:Y'],
+            'branch_id' => ['required', 'numeric']
+
         ];
     }
 }

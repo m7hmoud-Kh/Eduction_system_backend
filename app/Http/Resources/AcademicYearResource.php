@@ -16,9 +16,8 @@ class AcademicYearResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->yearNameFormat($this->name),
-            'year' => $this->year,
-            'branch_id' => $this->branch_id,
+            'year_name' => $this->yearNameFormat($this->year, $this->name),
+            'branch_name' => $this->branch->name
         ];
     }
 }

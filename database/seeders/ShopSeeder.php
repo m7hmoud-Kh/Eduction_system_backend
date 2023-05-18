@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Shop;
 use App\Models\Branch;
 use Illuminate\Support\Facades\DB;
@@ -15,10 +16,8 @@ class ShopSeeder extends Seeder
      *
      * @return void
      */
-   
     public function run()
     {
-
         $ids=Branch::pluck('id');
 
         for ($i=0; $i < 3 ; $i++) {
@@ -27,6 +26,8 @@ class ShopSeeder extends Seeder
                 'branche_id'=>$ids[rand(0,count($ids)-1)]
             ]);
             
+
+
         }
     }
 }

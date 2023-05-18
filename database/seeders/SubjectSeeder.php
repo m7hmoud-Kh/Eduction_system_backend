@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\Semester;
 use App\Models\AcademicYear;
+use App\Models\Branch;
 use App\Models\Subject;
+
+use function PHPSTORM_META\map;
 
 class SubjectSeeder extends Seeder
 {
@@ -21,11 +23,14 @@ class SubjectSeeder extends Seeder
         $faker = Factory::create();
         $academicYearsIds = AcademicYear::pluck('id');
         $semestersIds = Semester::pluck('id');
+        $BranchId = Branch::pluck('id');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Subject::create([
-                'name' => $faker->name(),
-                'status' => 1,
+                'name' => $faker->sentence(2),
+                'status' => '1',
+                'image' => '1.jpg',
+                'branch_id' => $BranchId->random(),
                 'academic_year_id' => $academicYearsIds[rand(0, count($academicYearsIds) - 1)],
                 'semester_id' => $semestersIds[rand(0, count($semestersIds) - 1)],
             ]);

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\AcademicYear;
@@ -19,13 +18,12 @@ class SemesterSeeder extends Seeder
      */
     public function run()
     {
-        $ids = AcademicYear::pluck('id');
+        $academicYearIds = AcademicYear::pluck('id');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             Semester::create([
-                'name' => 2,
-                'status' => 1,
-                'academic_year_id' => $ids[rand(0, count($ids) - 1)]
+                'name' => rand(1, 2),
+                'academic_year_id' => $academicYearIds[rand(0, count($academicYearIds) - 1)]
             ]);
         }
     }

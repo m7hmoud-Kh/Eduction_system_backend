@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
-            $table->enum("status", [0, 1]);
+            $table->enum("status", [0, 1])->default(1);
+            $table->string('image');
             $table->foreignId("academic_year_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId("semester_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId("branch_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subject');
+        Schema::dropIfExists('subjects');
     }
 };

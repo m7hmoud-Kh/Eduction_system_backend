@@ -15,8 +15,7 @@ use App\Http\Resources\CategoryResource;
 class CategoryController extends Controller
 {
     public function index()
-    {
-        
+    {   
         $allCategories= Category::all();
        
         return response()->json([
@@ -25,13 +24,13 @@ class CategoryController extends Controller
             'data' => CategoryResource::collection($allCategories)
         ]);
     }
-
    
     
     public function store(CategoryStoreRequest $request)
     {
         $category = Category::create($request->all());
         
+
         return response()->json([
             'message' => 'Created Successfully',
             'status' => Response::HTTP_CREATED,
@@ -48,7 +47,9 @@ class CategoryController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => new CategoryResource($category)
             ]);
+
         }else {
+
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND
@@ -56,9 +57,9 @@ class CategoryController extends Controller
         }
     }
 
-
    
     public function update(CategoryUpdateRequest $request,$id)
+
     {
         $category = Category::findOrFail($id);
         $category->update($request->all());
@@ -68,7 +69,6 @@ class CategoryController extends Controller
         ]);
     }
 
-   
     public function destroy($id)
     {
         $category = Category::findOrFail($id);

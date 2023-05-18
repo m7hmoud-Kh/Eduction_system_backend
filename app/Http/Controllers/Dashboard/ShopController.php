@@ -11,35 +11,35 @@ use App\Http\Resources\ShopResource;
 
 class ShopController extends Controller
 {
-  
+
+
     public function index()
     {
-        $allShops= Shop::all();
-       
+        $allShops = Shop::all();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
             'data' => ShopResource::collection($allShops)
         ]);
-       
+
     }
 
-   
-    
+
+
     public function store(ShopStoreRequest $request)
     {
         $shop = Shop::create($request->all());
-        
+
         return response()->json([
             'message' => 'Created Successfully',
             'status' => Response::HTTP_CREATED,
             'data' => new ShopResource($shop)
         ]);
     }
-    
+
+
     public function show($id)
     {
-        
         $shop = Shop::whereId($id)->first();
         if ($shop) {
             return response()->json([
@@ -47,7 +47,9 @@ class ShopController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => new ShopResource($shop)
             ]);
+
         }else {
+
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND
@@ -56,7 +58,7 @@ class ShopController extends Controller
     }
 
 
-   
+
     public function update(ShopUpdateRequest $request, $id)
     {
         $shop = Shop::findOrFail($id);
@@ -67,7 +69,7 @@ class ShopController extends Controller
         ]);
     }
 
-   
+
     public function destroy($id)
     {
         $shop = Shop::findOrFail($id);
@@ -77,5 +79,5 @@ class ShopController extends Controller
             'status' => Response::HTTP_NO_CONTENT,
         ]);
     }
-    
+
 }

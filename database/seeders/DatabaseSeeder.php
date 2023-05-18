@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             GovernorateSeeder::class,
             BranchSeeder::class,
             UserTableSeeder::class, 
+            StudentSeeder::class,
             ShopSeeder::class,
             CategorySeeder::class,
             TeacherSeeder::class,
@@ -36,7 +37,14 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             TransactionSeeder::class,
             CartSeeder::class,
-           
+            ClassRoomSeeder::class,
+            NoteSeeder::class,
+            AttachmentSeeder::class,
+            AppointmentSeeder::class,
+            ExamSeeder::class,
+            QuestionSeeder::class,
+            OptionSeeder::class
+
         ]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\relation;
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ Route::get('relationproduct', [relation::class, 'get_product_orders']);
 Route::get('relationadd', [relation::class, 'add_product_to_order']);
 Route::get('relationupdate', [relation::class, 'update_product_to_order']);
 Route::get('relationupdatestill', [relation::class, 'update_still_product_to_order']);
+

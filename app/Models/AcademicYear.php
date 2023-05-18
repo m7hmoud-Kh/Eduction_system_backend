@@ -2,29 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AcademicYear extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'year', 'branch_id'];
+    protected $fillable = [
+        'name',
+        'year',
+        'branch_id'
+    ];
 
-    public function yearNameFormat($yearName)
+    public function yearNameFormat($year, $Name)
     {
-        switch ($yearName) {
+        switch ($Name) {
             case 1:
-                return "الصف الاول الثانوى";
+                return $year . " - الصف الاول الثانوى";
             case 2:
-                return "الصف الثانى الثانوى";
+                return  $year . " - الصف الثانى الثانوى";
             case 3:
-                return "الصف الثالث الثانوى";
+                return  $year . " - الصف الثالث الثانوى";
             default:
                 break;
         }
     }
 
-    public function branches()
+    public function branch()
     {
         return $this->belongsTo(Branch::class);
     }

@@ -31,15 +31,6 @@ class UserTableSeeder extends Seeder
         $mananger->assignRole('manager');
 
 
-        // for ($i=0; $i < 3 ; $i++) {
-        //     $headOfManager = User::create([
-        //         'name' => $faker->name,
-        //         'email' => $faker->unique->email,
-        //         'password' => Hash::make('123456')
-        //     ]);
-        //     $headOfManager->assignRole('head_of_branch');
-        // }
-
         for ($i=0; $i < 6 ; $i++) {
             $assistant = User::create([
                 'name' => $faker->name,

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('branche_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-           
+
         });
     }
 

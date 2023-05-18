@@ -30,7 +30,6 @@ class ClassRoom extends Model
     public function student()
     {
         return $this->belongsToMany(Student::class, 'classroom_student')->withPivot('status')->withTimestamps();
-
     }
 
     public function attendance()
@@ -92,4 +91,5 @@ class ClassRoom extends Model
     {
         return $query->where('subject_id', $subjectId);
     }
+
 }

@@ -39,12 +39,15 @@ Route::group([
     Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
 
     Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
+    Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
+    Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
+    Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
 });
 
 //student in classRoom must check if student already registered in classRoom Or not
 
 Route::group([
-    'middleware' => ['auth:student','registered_student']
+    'middleware' => ['auth:student', 'registered_student']
 ], function () {
     Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);

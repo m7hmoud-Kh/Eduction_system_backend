@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ClassRoomResource;
 use App\Http\Requests\Website\ClassRoom\RegisterRequest;
-
+use Illuminate\Http\Request;
 
 class ClassRoomStudentController extends Controller
 {
@@ -55,8 +55,8 @@ class ClassRoomStudentController extends Controller
             'data' => ClassRoomResource::collection($classrooms)
         ]);
     }
-    
-    public function unsubscribe(RegisterRequest $request)
+
+    public function unsubscribe(Request $request)
     {
         $found = $this->getStudentObject(Auth('student')->user()->id)->classRoom->contains($request->classroom_id);
 

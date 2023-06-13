@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('class_room_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('appointment_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('attendance_date')->default(date('Y-m-d'));
+            $table->date('attendance_date');
             $table->enum('status', [0, 1, 2])->default('0')->comment('
             0 => absence
             1 => Presence and not pay

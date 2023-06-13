@@ -156,8 +156,8 @@ Route::group([
         ClassRoomStudentController::class, 'getAllStudentInClassRoom'
     ]);
 
-    Route::get('/all-students-classroom-waiting/{classroom_id}', [
-        ClassRoomStudentController::class, 'getAllStudentWaitingInClassRoom'
+    Route::get('/all-students-classroom_based_on_status/{classroom_id}/{status}', [
+        ClassRoomStudentController::class, 'getAllStudentInClassRoomBasedOnStatus'
     ]);
 });
 

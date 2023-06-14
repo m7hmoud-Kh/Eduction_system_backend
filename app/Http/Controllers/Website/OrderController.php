@@ -49,11 +49,12 @@ class OrderController extends Controller
             //order attribute    
             $tax=($sup_total*10)/100;
             $shipping=10;
-            $total=$sup_total+$shipping-$tax;
-
+            $discount=10;
+            $total=$sup_total+$shipping+$tax-$discount;
+            
 
             //create order
-            Order::create(['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>10,'shipping'=>$shipping,'tax'=>$tax,'total'=>$total]);
+            Order::create(['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>$discount,'shipping'=>$shipping,'tax'=>$tax,'total'=>$total]);
             $order =Order::where('student_id', Auth::user()->id)->latest()->first();
             $order_id=$order->id;
             $order_stauts= $order->status;

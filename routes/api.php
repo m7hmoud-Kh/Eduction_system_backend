@@ -75,7 +75,7 @@ Route::group([
     Route::get('show-cart', [CartController::class, 'show']);
     Route::post('ubdate-cart', [CartController::class, 'update']);
     Route::delete('delete-cart', [CartController::class, 'destroy']);
-  
+    Route::delete('delete_product/{proudct_id}', [CartController::class, 'delete_product_in_cart']);
    
 });
 

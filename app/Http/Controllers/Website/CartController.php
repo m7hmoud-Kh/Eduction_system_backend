@@ -134,5 +134,35 @@ class CartController extends Controller
         ]);
     }
 
+    public function delete_product_in_cart($product_id){
+        //select the product delete
+        $product = Product::find($product_id);
+        if($product){
+           //select the cart to update
+           $cart=Cart::where('student_id', Auth::user()->id)->where('product_id',$product->id)->latest()->first();
+
+           //check if there is such product in his cart
+           if($cart){
+               $cart->delete();
+               return response()->json([
+                   'message' => 'deleted',
+                   'status' => Response::HTTP_NO_CONTENT
+               ]);
+           }
+           else{
+               return response()->json([
+                   'message' => 'you dont have this product in your cart',
+               ]);
+           }
+       }
+       elseif(!$product){
+           return response()->json([
+               'message' => 'this product dosent exist'
+               
+           ]);
+       }
+
+   }
+
    
 }

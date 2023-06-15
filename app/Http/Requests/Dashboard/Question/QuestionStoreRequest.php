@@ -25,12 +25,12 @@ class QuestionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'question' => ['required','string','max:200'],
-            'type' => ['required',Rule::in(0,1,2)],
-            'point' => ['required','numeric'],
-            'image' => ['image','mimes:png,jpg'],
-            'explanation' =>['max:100'],
-            'exam_id' =>['required','numeric']
+            'question' => ['required', 'string', 'max:300'],
+            'type' => ['required', Rule::in(0, 1, 2)],
+            'point' => ['required', 'numeric'],
+            'image' => ['image', 'mimes:png,jpg'],
+            'explanation' => ['max:100'],
+            'exam_id' => ['required', 'numeric']
         ];
     }
 }

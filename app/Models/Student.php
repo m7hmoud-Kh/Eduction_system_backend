@@ -113,9 +113,9 @@ class Student extends Authenticatable implements JWTSubject
             case '2':
                 return "حضور ودفع المال";
             default:
-                # code...
                 break;
         }
     }
 
 }
+

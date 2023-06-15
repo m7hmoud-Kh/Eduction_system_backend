@@ -44,16 +44,16 @@ class StudentController extends Controller
     public function register(Request $request)
      {
         $validator = Validator::make($request->all(), [
-            'f_name' => 'required|string|between:2,100',
-            'm_name' => 'required|string|between:2,100',
-            'l_name' => 'required|string|between:2,100',
+            'f_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
+            'm_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
+            'l_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
             'phone_number' => ['required','regex:/(01)[0-9]{9}/','size:11'],
-            'email' => 'required|string|email|max:100|unique:students',
+            'email' => 'required|string|email|max:100|unique:students|',
             'password' => 'required|string|confirmed|min:6',
-            'guardian_number' => ['required','regex:/(01)[0-9]{9}/','size:11'],
+            'guardian_number' => ['required','regex:/(01)[0-9]{9}/','size:11','different:phone_number'],
             'year' => 'required',
-            'month' => 'required',
-            'day' => ['required','numeric'],
+            'month' => ['required','numeric','max:12'],
+            'day' => ['required','numeric','max:32'],
             'acedemic_year' => ['required','numeric'],
             'division' =>  ['required', Rule::in(1, 2, 3, 4, 5)],
             'national_id_card' => ['required','mimes:jpg,png,jpeg'],

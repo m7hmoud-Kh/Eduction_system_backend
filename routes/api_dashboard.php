@@ -178,13 +178,9 @@ Route::group([
     'middleware' => ['auth', 'role:assistant']
 
 ], function () {
-    Route::get('classRooms', [ClassRoomController::class, 'index']);
     Route::post('classRooms', [ClassRoomController::class, 'store']);
     Route::get('classRooms/{id}', [ClassRoomController::class, 'show']);
-    Route::get('classRooms/{id}', [ClassRoomController::class, 'show']);
     Route::get('classrooms_get_by_branch_id/{id}', [ClassRoomController::class, 'getClassroomsByBranchId']);
-    Route::get('classrooms_get_by_teacher_id/{id}', [ClassRoomController::class, 'getClassroomsByTeacherId']);
-    Route::get('classrooms_get_by_subject_id/{id}', [ClassRoomController::class, 'getClassroomsBySubjectId']);
     Route::post('classRooms/{id}', [ClassRoomController::class, 'update']);
     Route::delete('classRooms/{id}', [ClassRoomController::class, 'destory']);
 
@@ -200,8 +196,8 @@ Route::group([
         ClassRoomStudentController::class, 'getAllStudentInClassRoom'
     ]);
 
-    Route::get('/all-students-classroom-waiting/{classroom_id}', [
-        ClassRoomStudentController::class, 'getAllStudentWaitingInClassRoom'
+    Route::get('/all-students-classroom_based_on_status/{classroom_id}/{status}', [
+        ClassRoomStudentController::class, 'getAllStudentInClassRoomBasedOnStatus'
     ]);
 });
 

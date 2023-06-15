@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
 use App\Http\Controllers\Website\ExamController;
+use App\Http\Controllers\Website\Homecontroller;
 
 
 
@@ -92,5 +93,14 @@ Route::group([
     Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
     Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
+});
+
+Route::group([
+    'middleware' => 'auth:student'
+], function () {
+
+    Route::get('get-shops-for-branch/{branch_id}', [Homecontroller::class, 'get_shops_by_branch']);
+    Route::get('get-categories-for-shop/{shop_id}', [Homecontroller::class, 'get_category_by_shop']);
+    Route::get('get-products-for-category/{category_id}', [Homecontroller::class, 'get_product_by_category']);
 });
 

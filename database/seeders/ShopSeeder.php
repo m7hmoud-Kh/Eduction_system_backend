@@ -16,17 +16,18 @@ class ShopSeeder extends Seeder
      *
      * @return void
      */
-
     public function run()
     {
+        $ids=Branch::pluck('id');
 
-        $ids = Branch::pluck('id');
-
-        for ($i = 0; $i < 3; $i++) {
+        for ($i=0; $i < 3 ; $i++) {
             Shop::create([
-                'name' => Str::random(10),
-                'branche_id' => $ids[rand(0, count($ids) - 1)]
+                'name'=>Str::random(10),
+                'branche_id'=>$ids[rand(0,count($ids)-1)]
             ]);
+            
+
+
         }
     }
 }

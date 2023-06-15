@@ -1,14 +1,21 @@
 <?php
 
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Website\StudentController;
+use App\Http\Controllers\Website\ProductController;
+use App\Http\Controllers\Website\OrderController;
+use App\Http\Controllers\Website\TransactionController;
+use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\ClassRoomController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
 use App\Http\Controllers\Website\ExamController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Website\StudentController;
+use App\Http\Controllers\Website\Homecontroller;
+
 
 
 
@@ -42,7 +49,49 @@ Route::group([
     Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
     Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
+
 });
+
+Route::group([
+    'middleware' => 'auth:student'
+], function () {
+    Route::get('products', [ProductController::class, 'index']);
+});
+
+Route::group([
+    'middleware' => 'auth:student'
+], function () {
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::post('orders', [OrderController::class, 'store']);
+    Route::post('orders/{id}', [OrderController::class, 'update']);
+    Route::get('show_order_with_details/{id}', [OrderController::class, 'show_order_with_details']);
+   
+});
+
+// Route::group([
+//     'middleware' => 'auth:student'
+// ], function () {
+//     Route::get('transactions', [TransactionController::class, 'index']);
+//     Route::post('transactions/{id}', [TransactionController::class, 'update']);
+  
+   
+// });
+
+Route::group([
+    'middleware' => 'auth:student'
+], function () {
+    Route::post('create-cart', [CartController::class, 'store']);
+    Route::get('show-cart', [CartController::class, 'show']);
+    Route::post('ubdate-cart', [CartController::class, 'update']);
+    Route::delete('delete-cart', [CartController::class, 'destroy']);
+    Route::delete('delete_product/{proudct_id}', [CartController::class, 'delete_product_in_cart']);
+   
+});
+
+
+ Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
+
+ Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
 
 //student in classRoom must check if student already registered in classRoom Or not
 
@@ -53,3 +102,10 @@ Route::group([
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
     Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
 });
+
+
+
+    Route::get('get-shops-for-branch/{branch_id}', [Homecontroller::class, 'get_shops_by_branch']);
+    Route::get('get-categories-for-shop/{shop_id}', [Homecontroller::class, 'get_category_by_shop']);
+    Route::get('get-products-for-category/{category_id}', [Homecontroller::class, 'get_product_by_category']);
+

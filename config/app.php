@@ -71,6 +71,7 @@ return [
 
     'timezone' => 'Asia/Kuwait',
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

@@ -34,12 +34,8 @@ class QuestionController extends Controller
 
     public function store(QuestionStoreRequest $request)
     {
-        $newImage =
-            $this->insertImage($request->question, $request->image, 'Question_image');
-        $data = array_merge(
-            $request->all(),
-            ['image' => $newImage]
-        );
+        $newImage = $this->insertImage($request->question, $request->image, 'Question_image');
+        $data = array_merge($request->all(), ['image' => $newImage]);
         $question = Question::create($data);
         return response()->json([
             'message' => 'Created Successfully',
@@ -69,20 +65,26 @@ class QuestionController extends Controller
     public function update(QuestionUpdateRequest $request, $id)
     {
         $question = Question::findOrFail($id);
-        if ($request->file('image')) {
-            Storage::disk('subject_image')->delete($question->image);
-            $newImage =
-                $this->insertImage($request->question, $request->image, 'Question_image');
-            $data = array_merge(
-                $request->all(),
-                ['image' => $newImage]
-            );
+
+        if ($question) {
+
+            if ($request->file('image')) {
+                Storage::disk('question_image')->delete($question->image);
+                $newImage = $this->insertImage($request->question, $request->image, 'Question_image');
+                $question->update(array_merge($request->all(), ['image' => $newImage]));
+            } else {
+                $question->update($request->all());
+            }
+            return response()->json([
+                'message' => 'Updated',
+                'status' => Response::HTTP_NO_CONTENT
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
         }
-        $question->update($data);
-        return response()->json([
-            'message' => 'Update',
-            'status' => Response::HTTP_NO_CONTENT
-        ]);
     }
 
     public function destory($id)

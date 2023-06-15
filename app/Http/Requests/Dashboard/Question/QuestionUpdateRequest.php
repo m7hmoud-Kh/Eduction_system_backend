@@ -29,7 +29,7 @@ class QuestionUpdateRequest extends FormRequest
             'type' => ['required', Rule::in(0, 1, 2)],
             'point' => ['required', 'numeric'],
             'image' => ['image', 'mimes:png,jpg'],
-            'explanation' => ['string', 'max:100'],
+            'explanation' => ['string', 'max:100']
         ];
     }
 }

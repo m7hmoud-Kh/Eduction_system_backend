@@ -17,11 +17,11 @@ use App\Http\Resources\ProductResources;
 class Homecontroller extends Controller
 {
     public function get_shops_by_branch($branch_id){
-        $shops=Shop::where('branche_id',$branch_id)->get();
+        $shops=Shop::where('branche_id',$branch_id)->first();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => ShopResource::collection($shops)
+            'data' => new ShopResource($shops),
         ]);
     }
 

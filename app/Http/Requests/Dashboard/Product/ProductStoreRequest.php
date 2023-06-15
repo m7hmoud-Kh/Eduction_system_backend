@@ -27,6 +27,7 @@ class ProductStoreRequest extends FormRequest
             'name' => ['required'],
             'subject_id'=>['required','numeric'],
             'teacher_id'=>['required','numeric'],
+            'category_id'=>['required','numeric'],
             'price'=>'required|numeric|min:1',
             'quantity'=>'required|numeric|min:1',
             'description'=>['required'],

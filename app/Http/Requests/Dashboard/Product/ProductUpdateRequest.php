@@ -28,6 +28,7 @@ class ProductUpdateRequest extends FormRequest
             'name' => ['required','unique:products,id,:'.$this->id],
             'subject_id'=>['required','numeric'],
             'teacher_id'=>['required','numeric'],
+            'category_id'=>['numeric'],
             'status' => ['required', Rule::in(1, 0)],
             'price'=>'required|numeric|min:1',
             'quantity'=>'required|numeric|min:1',

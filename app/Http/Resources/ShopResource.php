@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Branch;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShopResource extends JsonResource
@@ -14,10 +15,13 @@ class ShopResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        $id=$this->branche_id;
+        $branch=Branch::where('id',$id)->first();
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'branche_id' => $this->branche_id
+            'branche' => $branch->name,
         ];
        
     }

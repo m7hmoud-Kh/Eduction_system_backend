@@ -25,26 +25,21 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GovernorateSeeder::class,
             BranchSeeder::class,
-            UserTableSeeder::class, 
-            StudentSeeder::class,
+            UserTableSeeder::class,
             ShopSeeder::class,
             CategorySeeder::class,
             TeacherSeeder::class,
             AcademicYearSeeder::class,
             SemesterSeeder::class,
             SubjectSeeder::class,
-            ProductSeeder::class,
-            OrderSeeder::class,
-            TransactionSeeder::class,
-            CartSeeder::class,
             ClassRoomSeeder::class,
             NoteSeeder::class,
             AttachmentSeeder::class,
             AppointmentSeeder::class,
+            StudentSeeder::class,
             ExamSeeder::class,
             QuestionSeeder::class,
             OptionSeeder::class
-
         ]);
     }
 }

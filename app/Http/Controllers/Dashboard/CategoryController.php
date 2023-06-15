@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,21 +16,22 @@ use App\Http\Resources\CategoryResource;
 class CategoryController extends Controller
 {
     public function index()
-    {   
-        $allCategories= Category::all();
-       
+    {
+
+        $allCategories = Category::all();
+
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
             'data' => CategoryResource::collection($allCategories)
         ]);
     }
-   
-    
+
+
+
     public function store(CategoryStoreRequest $request)
     {
         $category = Category::create($request->all());
-        
 
         return response()->json([
             'message' => 'Created Successfully',
@@ -47,9 +49,7 @@ class CategoryController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => new CategoryResource($category)
             ]);
-
-        }else {
-
+        } else {
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND
@@ -57,9 +57,9 @@ class CategoryController extends Controller
         }
     }
 
-   
-    public function update(CategoryUpdateRequest $request,$id)
 
+
+    public function update(CategoryUpdateRequest $request, $id)
     {
         $category = Category::findOrFail($id);
         $category->update($request->all());
@@ -68,6 +68,7 @@ class CategoryController extends Controller
             'status' => Response::HTTP_NO_CONTENT
         ]);
     }
+
 
     public function destroy($id)
     {

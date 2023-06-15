@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
 use App\Models\Shop;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -12,16 +13,15 @@ use App\Http\Resources\ShopResource;
 class ShopController extends Controller
 {
 
-
     public function index()
     {
         $allShops = Shop::all();
+
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
             'data' => ShopResource::collection($allShops)
         ]);
-
     }
 
 
@@ -37,9 +37,9 @@ class ShopController extends Controller
         ]);
     }
 
-
     public function show($id)
     {
+
         $shop = Shop::whereId($id)->first();
         if ($shop) {
             return response()->json([
@@ -47,9 +47,7 @@ class ShopController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => new ShopResource($shop)
             ]);
-
-        }else {
-
+        } else {
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND
@@ -79,5 +77,4 @@ class ShopController extends Controller
             'status' => Response::HTTP_NO_CONTENT,
         ]);
     }
-
 }

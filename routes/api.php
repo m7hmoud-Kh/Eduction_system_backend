@@ -38,7 +38,7 @@ Route::group([
 
     Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
 
-    Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
+    Route::delete('/unsubscribe-classroom/{classroom_id}', [ClassRoomStudentController::class, 'unsubscribe']);
     Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
     Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);

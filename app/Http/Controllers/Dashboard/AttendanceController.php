@@ -20,14 +20,15 @@ class AttendanceController extends Controller
                 $found->update([
                     'status' => $status
                 ]);
-                continue;
+            } else {
+                Attendance::create([
+                    'class_room_id' => $request->class_room_id,
+                    'appointment_id' => $request->appointment_id,
+                    'student_id' => $studentId,
+                    'attendance_date' => date("Y-m-d"),
+                    'status' => $status
+                ]);
             }
-            Attendance::create([
-                'class_room_id' => $request->class_room_id,
-                'appointment_id' => $request->appointment_id,
-                'student_id' => $studentId,
-                'status' => $status
-            ]);
         }
         return response()->json([
             'status' => Response::HTTP_OK,

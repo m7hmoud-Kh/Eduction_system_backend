@@ -103,12 +103,12 @@ class ClassRoomStudentController extends Controller
 
     }
 
-    public function getAllStudentWaitingInClassRoom($classroomId)
+    public function getAllStudentInClassRoomBasedOnStatus($classroomId, $status)
     {
-        $allStudentsRegisteredInClassRoom = Student::whereHas('classRoom', function ($query) use ($classroomId) {
+        $allStudentsRegisteredInClassRoom = Student::whereHas('classRoom', function ($query) use ($classroomId, $status) {
             return $query
             ->where('class_rooms.id', $classroomId)
-            ->where('classroom_student.status', ClassRoom::WAITING);
+            ->where('classroom_student.status', $status);
         })->with('classRoom')->get();
 
 

@@ -42,6 +42,10 @@ Route::group([
     Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
     Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
+
+
+    Route::get('/all-classroom-basedOnAuthStudent/{status}',
+     [ClassRoomStudentController::class, 'classroomBasedOnAuthStudent']);
 });
 
 //student in classRoom must check if student already registered in classRoom Or not

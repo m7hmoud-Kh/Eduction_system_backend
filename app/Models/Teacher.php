@@ -16,4 +16,8 @@ class Teacher extends Model
         return $this->belongsToMany(Branch::class, 'teacher_branch');
     }
 
+    // public function classRoom()
+    // {
+    //     return $this->belongsTo(ClassRoom::class);
+    // }
 }

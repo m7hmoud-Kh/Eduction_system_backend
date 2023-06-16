@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AppointmentController;
+use App\Http\Controllers\Dashboard\AttachmentController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\Dashboard\ClassRoomController;
+use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
 use App\Http\Controllers\Website\ExamController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\StudentController;
 
@@ -52,4 +54,9 @@ Route::group([
     Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
     Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
+    Route::get('notes/{classroom_id}', [NoteController::class, 'getNotesByClassroomId']);
+    Route::get('lastFiveNotes/{classroom_id}', [NoteController::class, 'getLastFiveNotesLByClassroomId']);
+    Route::get('appointments/{classroom_id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
+    Route::get('teacherss/{classroom_id}', [TeacherController::class, 'getTeachersByClassroomId']);
+    Route::get('attachments/{classroom_id}', [AttachmentController::class, 'getAttachmentsByClassroomId']);
 });

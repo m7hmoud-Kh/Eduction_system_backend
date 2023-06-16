@@ -16,7 +16,7 @@ class AttachmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => 'Attachment/' . $this->name,
+            'name' => 'Attachments/' . $this->name,
             'description' => $this->description,
             'classroom_name' => $this->classRoom->name
         ];

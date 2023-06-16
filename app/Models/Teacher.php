@@ -10,14 +10,8 @@ class Teacher extends Model
     use HasFactory;
     protected $guarded = [];
 
-
     public function branch()
     {
         return $this->belongsToMany(Branch::class, 'teacher_branch');
     }
-
-    // public function classRoom()
-    // {
-    //     return $this->belongsTo(ClassRoom::class);
-    // }
 }

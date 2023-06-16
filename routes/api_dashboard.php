@@ -180,7 +180,7 @@ Route::group([
     Route::get('attachment', [AttachmentController::class, 'index']);
     Route::post('attachment', [AttachmentController::class, 'store']);
     Route::get('attachment/{id}', [AttachmentController::class, 'show']);
-    Route::get('attachment_get_by_classroom_id/{id}', [AttachmentController::class, 'getAttachmentByClassroomId']);
+    Route::get('attachment_get_by_classroom_id/{id}', [AttachmentController::class, 'getAttachmentsByClassroomId']);
     Route::post('attachment/{id}', [AttachmentController::class, 'update']);
     Route::delete('attachment/{id}', [AttachmentController::class, 'destory']);
 });
@@ -192,7 +192,7 @@ Route::group([
     Route::get('appointment', [AppointmentController::class, 'index']);
     Route::post('appointment', [AppointmentController::class, 'store']);
     Route::get('appointment/{id}', [AppointmentController::class, 'show']);
-    Route::get('appointment_get_by_classroom_id/{id}', [AppointmentController::class, 'getAppointmentByClassroomId']);
+    Route::get('appointment_get_by_classroom_id/{id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
     Route::post('appointment/{id}', [AppointmentController::class, 'update']);
     Route::delete('appointment/{id}', [AppointmentController::class, 'destory']);
 });

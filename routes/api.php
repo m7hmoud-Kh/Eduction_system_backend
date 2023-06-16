@@ -46,8 +46,10 @@ Route::group([
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
 
 
-    Route::get('/all-classroom-basedOnAuthStudent/{status}',
-     [ClassRoomStudentController::class, 'classroomBasedOnAuthStudent']);
+    Route::get(
+        '/all-classroom-basedOnAuthStudent/{status}',
+        [ClassRoomStudentController::class, 'classroomBasedOnAuthStudent']
+    );
 });
 
 //student in classRoom must check if student already registered in classRoom Or not
@@ -61,6 +63,6 @@ Route::group([
     Route::get('notes/{classroom_id}', [NoteController::class, 'getNotesByClassroomId']);
     Route::get('lastFiveNotes/{classroom_id}', [NoteController::class, 'getLastFiveNotesLByClassroomId']);
     Route::get('appointments/{classroom_id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
-    Route::get('teacherss/{classroom_id}', [TeacherController::class, 'getTeachersByClassroomId']);
+    Route::get('get-teachers/{classroom_id}', [TeacherController::class, 'getTeachersByClassroomId']);
     Route::get('attachments/{classroom_id}', [AttachmentController::class, 'getAttachmentsByClassroomId']);
 });

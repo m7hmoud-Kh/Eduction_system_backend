@@ -21,14 +21,14 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function getAppointmentByClassroomId($classroomId)
+    public function getAppointmentsByClassroomId($classroomId)
     {
-        $notes = Appointment::with('classRoom')->where('class_room_id', $classroomId)->get();
-        if ($notes) {
+        $appointments = Appointment::with('classRoom')->where('class_room_id', $classroomId)->get();
+        if ($appointments) {
             return response()->json([
                 'message' => 'ok',
                 'status' => Response::HTTP_OK,
-                'data' => AppointmentResource::collection($notes)
+                'data' => AppointmentResource::collection($appointments)
             ]);
         } else {
             return response()->json([

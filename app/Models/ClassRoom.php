@@ -47,6 +47,11 @@ class ClassRoom extends Model
         return $this->belongsTo(Teacher::class);
     }
 
+    // public function teachers()
+    // {
+    //     return $this->hasMany(Note::class);
+    // }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);

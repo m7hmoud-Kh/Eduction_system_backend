@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Teacher;
-use Illuminate\Http\Request;
+use App\Models\ClassRoom;
 use App\Http\trait\Imageable;
 use Illuminate\Http\Response;
+use App\Http\trait\Branchable;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TeacherResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Teacher\TeacherStoreRequest;
 use App\Http\Requests\Dashboard\Teacher\TeacherUpdateRequest;
-use App\Http\trait\Branchable;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+
 
 class TeacherController extends Controller
 {
@@ -128,12 +127,14 @@ class TeacherController extends Controller
 
     public function getTeachersByClassroomId($classroomId)
     {
-        $teachers = Teacher::with('classRoom')->where('class_room_id', $classroomId)->get();
-        if ($teachers) {
+        $classroom = ClassRoom::with('teacher')->where('id', $classroomId)->first();
+        $teacher = $classroom->teacher;
+    
+        if ($teacher) {
             return response()->json([
                 'message' => 'ok',
                 'status' => Response::HTTP_OK,
-                'data' => TeacherResource::collection($teachers)
+                'data' => new TeacherResource($teacher)
             ]);
         } else {
             return response()->json([

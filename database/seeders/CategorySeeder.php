@@ -22,12 +22,12 @@ class CategorySeeder extends Seeder
 
         for ($i=0; $i < 3 ; $i++) {
 
-           
             Category::create([
                 'name'=>Str::random(10),
                 'status' => 1,
-                'shop_id'=>$ids[rand(0,count($ids)-1)]
+                'shop_id'=>$ids[rand(0, count($ids)-1)]
             ]);
+
 
         }
     }

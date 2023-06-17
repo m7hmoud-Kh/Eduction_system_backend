@@ -39,9 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-
             'url' => env('APP_URL') . '/storage',
-
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -55,7 +53,6 @@ return [
             'driver' => 'local',
             'root' => public_path('Teacher_image/'),
         ],
-
 
         'attachment_name' => [
             'driver' => 'local',
@@ -71,7 +68,6 @@ return [
             'driver' => 'local',
             'root' => public_path('Question_image/'),
         ],
-
 
         's3' => [
             'driver' => 's3',

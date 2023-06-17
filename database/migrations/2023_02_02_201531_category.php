@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('status', [1, 0])->default(1);
             $table->foreignId('shop_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-
         });
     }
 

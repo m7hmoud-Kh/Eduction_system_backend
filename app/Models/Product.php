@@ -11,16 +11,12 @@ class Product extends Model
     protected $guarded = [];
     public function subject()
     {
-
         return $this->belongsTo(Subject::class);
-       
     }
-    
+
     public function teacher()
     {
-
         return $this->belongsTo(Teacher::class);
-       
     }
 
     public function order(){
@@ -30,5 +26,5 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
-   
+
 }

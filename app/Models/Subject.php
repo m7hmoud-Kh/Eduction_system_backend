@@ -15,7 +15,6 @@ class Subject extends Model
     'image',
     'academic_year_id',
     'semester_id',
-    'branch_id',
 ];
     protected $table = 'subjects';
 

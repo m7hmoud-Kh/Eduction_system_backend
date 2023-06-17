@@ -34,7 +34,7 @@ class QuestionController extends Controller
 
     public function store(QuestionStoreRequest $request)
     {
-        $newImage = $this->insertImage($request->question, $request->image, 'Question_image');
+        $newImage = $this->insertImage($request->exam_id, $request->image, 'Question_image');
         $data = array_merge($request->all(), ['image' => $newImage]);
         $question = Question::create($data);
         return response()->json([

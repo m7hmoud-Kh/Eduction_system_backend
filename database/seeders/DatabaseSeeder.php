@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GovernorateSeeder::class,
             BranchSeeder::class,
-            UserTableSeeder::class, 
+            UserTableSeeder::class,
             StudentSeeder::class,
             ShopSeeder::class,
             CategorySeeder::class,
@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
             ExamSeeder::class,
             QuestionSeeder::class,
             OptionSeeder::class
-
         ]);
     }
 }

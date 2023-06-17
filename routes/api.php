@@ -65,17 +65,9 @@ Route::group([
     Route::post('orders', [OrderController::class, 'store']);
     Route::post('orders/{id}', [OrderController::class, 'update']);
     Route::get('show_order_with_details/{id}', [OrderController::class, 'show_order_with_details']);
-   
+
 });
 
-// Route::group([
-//     'middleware' => 'auth:student'
-// ], function () {
-//     Route::get('transactions', [TransactionController::class, 'index']);
-//     Route::post('transactions/{id}', [TransactionController::class, 'update']);
-  
-   
-// });
 
 Route::group([
     'middleware' => 'auth:student'
@@ -85,7 +77,7 @@ Route::group([
     Route::post('ubdate-cart', [CartController::class, 'update']);
     Route::delete('delete-cart', [CartController::class, 'destroy']);
     Route::delete('delete_product/{proudct_id}', [CartController::class, 'delete_product_in_cart']);
-   
+
 });
 
 

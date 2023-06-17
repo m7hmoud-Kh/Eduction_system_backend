@@ -3,18 +3,21 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Website\StudentController;
-use App\Http\Controllers\Website\ProductController;
-use App\Http\Controllers\Website\OrderController;
-use App\Http\Controllers\Website\TransactionController;
 use App\Http\Controllers\Website\CartController;
-use App\Http\Controllers\Dashboard\BranchController;
-use App\Http\Controllers\Dashboard\ClassRoomController;
-use App\Http\Controllers\Dashboard\SubjectController;
-use App\Http\Controllers\Dashboard\TeacherController;
-use App\Http\Controllers\Website\ClassRoomStudentController;
 use App\Http\Controllers\Website\ExamController;
 use App\Http\Controllers\Website\Homecontroller;
+use App\Http\Controllers\Website\OrderController;
+use App\Http\Controllers\Dashboard\NoteController;
+use App\Http\Controllers\Website\ProductController;
+use App\Http\Controllers\Website\StudentController;
+use App\Http\Controllers\Dashboard\BranchController;
+use App\Http\Controllers\Dashboard\SubjectController;
+use App\Http\Controllers\Dashboard\TeacherController;
+use App\Http\Controllers\Dashboard\ClassRoomController;
+use App\Http\Controllers\Website\TransactionController;
+use App\Http\Controllers\Dashboard\AttachmentController;
+use App\Http\Controllers\Dashboard\AppointmentController;
+use App\Http\Controllers\Website\ClassRoomStudentController;
 
 
 

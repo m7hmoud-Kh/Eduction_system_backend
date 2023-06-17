@@ -23,7 +23,6 @@ class AcademicYearController extends Controller
         ]);
     }
 
-
     public function getAcademicYearByBranchId($branchId)
     {
         $academicYears = AcademicYear::with('branch')->where('branch_id', $branchId)->get();

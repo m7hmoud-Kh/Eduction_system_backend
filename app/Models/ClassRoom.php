@@ -91,5 +91,4 @@ class ClassRoom extends Model
     {
         return $query->where('subject_id', $subjectId);
     }
-
 }

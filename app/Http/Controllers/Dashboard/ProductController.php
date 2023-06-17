@@ -15,16 +15,26 @@ class ProductController extends Controller
 {
    
     use Imageable;
-    public function index()
-    {
+   // public function index()
+    // {
         
-        $allproducts= Product::all();
+    //     $allproducts= Product::all();
        
+    //     return response()->json([
+    //         'message' => 'Ok',
+    //         'status' => Response::HTTP_OK,
+    //         'data' => ProductResources::collection($allproducts)
+    //     ]);
+    // }
+
+    public function index($category_id){
+        $products= Product::where('category_id',$category_id)->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => ProductResources::collection($allproducts)
+            'data' => ProductResources::collection($products)
         ]);
+
     }
 
    

@@ -13,15 +13,24 @@ class ShopController extends Controller
 {
 
 
-    public function index()
-    {
-        $allShops = Shop::all();
+    // public function index()
+    // {
+    //     $allShops = Shop::all();
+    //     return response()->json([
+    //         'message' => 'Ok',
+    //         'status' => Response::HTTP_OK,
+    //         'data' => ShopResource::collection($allShops)
+    //     ]);
+
+    // }
+
+    public function index($branch_id){
+        $shops=Shop::where('branche_id',$branch_id)->first();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => ShopResource::collection($allShops)
+            'data' => new ShopResource($shops),
         ]);
-
     }
 
 

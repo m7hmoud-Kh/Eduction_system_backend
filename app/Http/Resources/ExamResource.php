@@ -14,7 +14,7 @@ class ExamResource extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
@@ -22,14 +22,7 @@ class ExamResource extends JsonResource
             'end_at' => $this->examDateFormate($this->end_at),
             'status' => $this->status ? 'Puplished' : 'unPulished',
             'type' => $this->type ? 'Prerequest Exam':'Normal Exam' ,
-            'classroom_name' => $this->classRoom->name,
+            'classroom_name' => $this->classRoom->name
         ];
-        if ($this->questions_count !== null) {
-            $newArr = [
-                'count_questions' => $this->questions_count
-            ];
-            return array_merge($arr, $newArr);
-        }
-        return $arr;
     }
 }

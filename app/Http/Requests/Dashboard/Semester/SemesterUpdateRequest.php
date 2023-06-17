@@ -28,6 +28,7 @@ class SemesterUpdateRequest extends FormRequest
             'name' => ['required'],
             'status' => ['required', Rule::in(1, 0)],
             'academic_year_id' => ['required', 'numeric'],
+
         ];
     }
 }

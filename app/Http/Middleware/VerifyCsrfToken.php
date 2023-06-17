@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+
 use Closure;
+
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 class VerifyCsrfToken extends Middleware
@@ -16,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         //
     ];
 
+
     // public function handle($request, Closure $next)
     // {
     //     $response = $next($request);
@@ -27,4 +30,5 @@ class VerifyCsrfToken extends Middleware
 
     //     return $response;
     // }
+
 }

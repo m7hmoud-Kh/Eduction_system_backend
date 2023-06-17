@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Website;
 
 use App\Models\Student;
 use App\Models\ClassRoom;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\StudentResource;
 use App\Http\Resources\ClassRoomResource;
 use App\Http\Requests\Website\ClassRoom\RegisterRequest;
+use Illuminate\Http\Request;
 
 class ClassRoomStudentController extends Controller
 {
@@ -141,25 +140,5 @@ class ClassRoomStudentController extends Controller
                 'status' => Response::HTTP_NOT_FOUND
             ]);
         }
-    }
-
-    public function classroomBasedOnAuthStudent($status)
-    {
-        // dd(Auth::user('student')->id, $status);
-
-        $allClassroomBasedOnStatus = ClassRoom::whereHas('student', function ($query) use ($status) {
-            return $query
-            ->where('classroom_student.student_id', Auth::user('student')->id)
-            ->where('classroom_student.status', $status);
-        })->get();
-
-
-
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'data' => [
-                'allStudent' => ClassRoomResource::collection($allClassroomBasedOnStatus),
-            ]
-        ]);
     }
 }

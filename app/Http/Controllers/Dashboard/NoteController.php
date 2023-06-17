@@ -11,14 +11,21 @@ use App\Http\Requests\Dashboard\Note\NoteUpdateRequest;
 
 class NoteController extends Controller
 {
-    public function index()
+    public function getLastFiveNotesLByClassroomId($classroomId)
     {
-        $allNotes = Note::all();
-        return response()->json([
-            'message' => 'Ok',
-            'status' => Response::HTTP_OK,
-            'data' => NoteResource::collection($allNotes)
-        ]);
+        $notes = Note::with('classRoom')->where('class_room_id', $classroomId)->limit(5)->get();
+        if ($notes) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => NoteResource::collection($notes)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
     }
 
     public function getNotesByClassroomId($classroomId)

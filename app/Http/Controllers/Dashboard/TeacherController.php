@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\User;
 use App\Models\Teacher;
+use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use App\Http\trait\Imageable;
 use Illuminate\Http\Response;
+use App\Http\trait\Branchable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\TeacherResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Teacher\TeacherStoreRequest;
 use App\Http\Requests\Dashboard\Teacher\TeacherUpdateRequest;
-use App\Http\trait\Branchable;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -125,6 +126,23 @@ class TeacherController extends Controller
                 'status' => Response::HTTP_NOT_FOUND
             ]);
         }
+    }
 
+    public function getTeachersByClassroomId($classroomId)
+    {
+        $classroom = ClassRoom::with('teacher')->where('id', $classroomId)->first();
+        $teacher = $classroom->teacher;
+        if ($teacher) {
+            return response()->json([
+                'message' => 'ok',
+                'status' => Response::HTTP_OK,
+                'data' => new TeacherResource($teacher)
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Not Found',
+                'status' => Response::HTTP_NOT_FOUND
+            ]);
+        }
     }
 }

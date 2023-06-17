@@ -14,15 +14,16 @@ use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
-    public function index()
-    {   
-        $allCategories= Category::all();
-       
+
+    public function index($shop_id){
+
+        $categories=category::where('shop_id',$shop_id)->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,
-            'data' => CategoryResource::collection($allCategories)
+           'data' => CategoryResource::collection($categories)
         ]);
+
     }
    
     

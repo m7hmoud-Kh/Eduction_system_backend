@@ -109,3 +109,4 @@ Route::group([
     Route::get('get-categories-for-shop/{shop_id}', [Homecontroller::class, 'get_category_by_shop']);
     Route::get('get-products-for-category/{category_id}', [Homecontroller::class, 'get_product_by_category']);
 
+    //Route::get('get-products-for-category/{category_id}', [Homecontroller::class, 'get_product_by_category']);

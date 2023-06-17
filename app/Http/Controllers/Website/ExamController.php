@@ -19,7 +19,7 @@ class ExamController extends Controller
 {
     public function index($classRoomId)
     {
-        $exams = Exam::where('class_room_id', $classRoomId)->Status()->get();
+        $exams = Exam::where('class_room_id', $classRoomId)->withCount('questions')->Status()->get();
         if ($exams) {
             return response()->json([
                 'status' => Response::HTTP_OK,
@@ -32,11 +32,9 @@ class ExamController extends Controller
 
     public function view($examId)
     {
-        $exam = Exam::Status()->find($examId);
+        $exam = Exam::Status()->withCount('questions')->find($examId);
         $questions = Question::with('options')->where('exam_id', $exam->id)->get();
-
-        $this->checkIfStudentOpenExamBeforeTime($exam->start_at,$exam->end_at);
-        
+        $this->checkIfStudentOpenExamBeforeTime($exam->start_at, $exam->end_at);
         return response()->json([
             'data' => [
                 'exam' => new ExamResource($exam),

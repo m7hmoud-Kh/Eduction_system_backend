@@ -52,6 +52,10 @@ Route::group([
     Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
     Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
+
+
+    Route::get('/all-classroom-basedOnAuthStudent/{status}',
+    [ClassRoomStudentController::class, 'classroomBasedOnAuthStudent']);
 });
 
 Route::group([
@@ -79,11 +83,6 @@ Route::group([
     Route::delete('delete-cart', [CartController::class, 'destroy']);
     Route::delete('delete_product/{proudct_id}', [CartController::class, 'delete_product_in_cart']);
 });
-
-
-Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
-
-Route::delete('/unsubscribe-classroom', [ClassRoomStudentController::class, 'unsubscribe']);
 
 //student in classRoom must check if student already registered in classRoom Or not
 

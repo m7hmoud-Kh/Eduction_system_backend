@@ -141,4 +141,20 @@ class ClassRoomStudentController extends Controller
             ]);
         }
     }
+
+    public function classroomBasedOnAuthStudent($status)
+    {
+        $allClassroomBasedOnStatus = ClassRoom::whereHas('student', function ($query) use ($status) {
+            return $query
+            ->where('classroom_student.student_id', Auth::user('student')->id)
+            ->where('classroom_student.status', $status);
+        })->get();
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'data' => [
+                'allStudent' => ClassRoomResource::collection($allClassroomBasedOnStatus),
+            ]
+        ]);
+    }
 }

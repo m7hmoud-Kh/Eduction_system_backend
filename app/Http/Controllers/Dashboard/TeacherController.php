@@ -129,7 +129,6 @@ class TeacherController extends Controller
     {
         $classroom = ClassRoom::with('teacher')->where('id', $classroomId)->first();
         $teacher = $classroom->teacher;
-    
         if ($teacher) {
             return response()->json([
                 'message' => 'ok',

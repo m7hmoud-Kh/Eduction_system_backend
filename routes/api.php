@@ -90,6 +90,11 @@ Route::group([
     Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
     Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
+    Route::get('notes/{classroom_id}', [NoteController::class, 'getNotesByClassroomId']);
+    Route::get('lastFiveNotes/{classroom_id}', [NoteController::class, 'getLastFiveNotesLByClassroomId']);
+    Route::get('appointments/{classroom_id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
+    Route::get('get-teachers/{classroom_id}', [TeacherController::class, 'getTeachersByClassroomId']);
+    Route::get('attachments/{classroom_id}', [AttachmentController::class, 'getAttachmentsByClassroomId']);
 });
 
 

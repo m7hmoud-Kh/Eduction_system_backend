@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\User;
 use App\Models\Teacher;
 use App\Models\ClassRoom;
-use Illuminate\Http\Request;
 use App\Http\trait\Imageable;
 use Illuminate\Http\Response;
 use App\Http\trait\Branchable;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\TeacherResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Teacher\TeacherStoreRequest;
@@ -27,13 +24,12 @@ class TeacherController extends Controller
             'status' => Response::HTTP_OK,
             'data' => TeacherResource::collection($teachers)
         ]);
-
     }
     public function store(TeacherStoreRequest $request)
     {
         $branchId = $this->get_branch_id_by_auth_user();
         $newImage =
-        $this->insertImage($request->nick_name, $request->avatar, 'Teacher_image');
+            $this->insertImage($request->nick_name, $request->avatar, 'Teacher_image');
         $teacher = Teacher::create(array_merge(
             $request->all(),
             ['avatar' => $newImage]
@@ -55,7 +51,7 @@ class TeacherController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => new TeacherResource($teacher)
             ]);
-        }else {
+        } else {
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND
@@ -120,7 +116,7 @@ class TeacherController extends Controller
                 'status' => Response::HTTP_OK,
                 'data' => TeacherResource::collection($allTeacher)
             ]);
-        }else {
+        } else {
             return response()->json([
                 'message' => 'Not Found',
                 'status' => Response::HTTP_NOT_FOUND

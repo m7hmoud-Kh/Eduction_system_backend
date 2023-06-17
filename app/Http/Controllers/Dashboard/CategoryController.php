@@ -14,16 +14,6 @@ use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
-    // public function index()
-    // {   
-    //     $allCategories= Category::all();
-       
-    //     return response()->json([
-    //         'message' => 'Ok',
-    //         'status' => Response::HTTP_OK,
-    //         'data' => CategoryResource::collection($allCategories)
-    //     ]);
-    // }
 
     public function index($shop_id){
 

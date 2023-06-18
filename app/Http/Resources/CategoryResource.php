@@ -18,13 +18,10 @@ class CategoryResource extends JsonResource
    
     public function toArray($request)
     {
-        $id=$this->shop_id;
-        $shop=Shop::where('id',$id)->first();
-
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'shop' => $shop->name,
+            'shop' => $this->shop_id,
             'status' => $this->status ? 'on' : 'off',
         ];
     }

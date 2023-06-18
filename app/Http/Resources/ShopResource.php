@@ -15,13 +15,10 @@ class ShopResource extends JsonResource
      */
     public function toArray($request)
     {
-
-        $id=$this->branche_id;
-        $branch=Branch::where('id',$id)->first();
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'branche' => $branch->name,
+            'branche' => $this->branche_id,
         ];
        
     }

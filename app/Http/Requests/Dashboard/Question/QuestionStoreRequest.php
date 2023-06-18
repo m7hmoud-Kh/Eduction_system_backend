@@ -28,7 +28,7 @@ class QuestionStoreRequest extends FormRequest
             'question' => ['required', 'string', 'max:300'],
             'type' => ['required', Rule::in(0, 1, 2)],
             'point' => ['required', 'numeric'],
-            'image' => ['image', 'mimes:png,jpg'],
+            'image' => ['mimes:png,jpg'],
             'explanation' => ['max:100'],
             'exam_id' => ['required', 'numeric']
         ];

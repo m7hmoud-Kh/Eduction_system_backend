@@ -9,6 +9,7 @@ use App\Http\trait\Imageable;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Website\Student\ChangeStudentPasswordRequest;
 use App\Http\Requests\Website\Student\StudentUpdateRequest;
 use App\Http\Resources\GovernorateResource;
 use App\Http\Resources\StudentResource;
@@ -42,7 +43,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request)
-     {
+    {
         $validator = Validator::make($request->all(), [
             'f_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
             'm_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
@@ -140,6 +141,25 @@ class StudentController extends Controller
             return response()->json([
                 'message' => 'Student Deleted Successfully',
                 'status' => Response::HTTP_NO_CONTENT
+            ]);
+        }
+    }
+
+    public function changePassword(ChangeStudentPasswordRequest $request)
+    {
+        if (password_verify($request->current_password, Auth::user('student')->password)) {
+            $user = Student::find(Auth::user('student')->id);
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+
+            return response()->json([
+                'message' => 'Password Change Successfully',
+                'status' => Response::HTTP_OK
+            ]);
+        }else {
+            return response()->json([
+                'message' => "Current Password not Correct",
             ]);
         }
     }

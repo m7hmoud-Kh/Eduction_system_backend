@@ -34,7 +34,7 @@ class QuestionController extends Controller
 
     public function store(QuestionStoreRequest $request)
     {
-        $newImage = $this->insertImage($request->question, $request->image, 'Question_image');
+        $newImage = $this->insertImage($request->exam_id, $request->image, 'Question_image');
         $data = array_merge($request->all(), ['image' => $newImage]);
         $question = Question::create($data);
         return response()->json([
@@ -67,10 +67,11 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
 
         if ($question) {
-
             if ($request->file('image')) {
-                Storage::disk('question_image')->delete($question->image);
-                $newImage = $this->insertImage($request->question, $request->image, 'Question_image');
+                if ($question->image) {
+                    Storage::disk('question_image')->delete($question->image);
+                }
+                $newImage = $this->insertImage($request->exam_id, $request->file('image'), 'Question_image');
                 $question->update(array_merge($request->all(), ['image' => $newImage]));
             } else {
                 $question->update($request->all());
@@ -90,7 +91,7 @@ class QuestionController extends Controller
     public function destory($id)
     {
         $question = Question::findOrFail($id);
-        Storage::disk('subject_image')->delete($question->image);
+        Storage::disk('question_image')->delete($question->image);
         $question->delete();
         return response()->json([
             'message' => 'Delete',

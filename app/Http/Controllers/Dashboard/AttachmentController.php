@@ -25,7 +25,7 @@ class AttachmentController extends Controller
         ]);
     }
 
-    public function getAttachmentByClassroomId($classroomId)
+    public function getAttachmentsByClassroomId($classroomId)
     {
         $attachments = Attachment::with('classRoom')->where('class_room_id', $classroomId)->get();
         if ($attachments) {

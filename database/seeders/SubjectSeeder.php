@@ -8,6 +8,7 @@ use App\Models\Semester;
 use App\Models\AcademicYear;
 use App\Models\Branch;
 use App\Models\Subject;
+use App\Models\Teacher;
 
 use function PHPSTORM_META\map;
 

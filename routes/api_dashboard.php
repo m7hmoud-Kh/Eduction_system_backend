@@ -232,7 +232,7 @@ Route::group([
     Route::get('appointment', [AppointmentController::class, 'index']);
     Route::post('appointment', [AppointmentController::class, 'store']);
     Route::get('appointment/{id}', [AppointmentController::class, 'show']);
-    Route::get('appointment_get_by_classroom_id/{id}', [AppointmentController::class, 'getAppointmentByClassroomId']);
+    Route::get('appointment_get_by_classroom_id/{id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
     Route::post('appointment/{id}', [AppointmentController::class, 'update']);
     Route::delete('appointment/{id}', [AppointmentController::class, 'destory']);
 });

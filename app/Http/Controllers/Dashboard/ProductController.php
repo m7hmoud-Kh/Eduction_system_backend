@@ -43,7 +43,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::whereId($id)->first();
+        //$product = Product::whereId($id)->first();
+        $product = Product::where('id',$id)->first();
         if ($product) {
             return response()->json([
                 'message' => 'ok',

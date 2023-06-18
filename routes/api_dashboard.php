@@ -129,7 +129,7 @@ Route::group([
 ], function () {
     Route::get('shops/{branch_id}', [ShopController::class, 'index']);
     Route::post('shops', [ShopController::class, 'store']);
-    Route::get('shops/{id}', [ShopController::class, 'show']);
+    Route::get('shop/{id}', [ShopController::class, 'show']);
     Route::post('shops/{id}', [ShopController::class, 'update']);
     Route::delete('shops/{id}', [ShopController::class, 'destroy']);
 });
@@ -139,7 +139,7 @@ Route::group([
 ], function () {
     Route::get('categories/{shop_id}', [CategoryController::class, 'index']);
     Route::post('categories', [CategoryController::class, 'store']);
-    Route::get('categories/{id}', [CategoryController::class, 'show']);
+    Route::get('category/{id}', [CategoryController::class, 'show']);
     Route::post('categories/{id}', [CategoryController::class, 'update']);
     Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
 });
@@ -149,7 +149,7 @@ Route::group([
 ], function () {
     Route::get('products/{category_id}', [ProductController::class, 'index']);
     Route::post('products', [ProductController::class, 'store']);
-    Route::get('products/{id}', [ProductController::class, 'show']);
+    Route::get('product/{id}', [ProductController::class, 'show']);
     Route::post('products/{id}', [ProductController::class, 'update']);
     Route::delete('products/{id}', [ProductController::class, 'destroy']);
 });

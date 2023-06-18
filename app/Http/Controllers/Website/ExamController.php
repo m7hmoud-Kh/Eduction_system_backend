@@ -29,7 +29,7 @@ class ExamController extends Controller
         }
     }
 
-    public function view($examId)
+    public function view($classRoomID, $examId)
     {
         $exam = Exam::Status()->withCount('questions')->find($examId);
         $questions = Question::with('options')->where('exam_id', $exam->id)->get();
@@ -109,7 +109,7 @@ class ExamController extends Controller
             ]);
 
             DB::commit();
-            
+
             return response()->json([
                 'message' => "Response is Submitted , Thank You"
             ]);

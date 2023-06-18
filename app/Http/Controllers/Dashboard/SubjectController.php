@@ -81,14 +81,30 @@ class SubjectController extends Controller
     }
 
     public function update(SubjectUpdateRequest $request, $id)
-    {
-        $subject = Subject::findOrFail($id);
-        $subject->update($request->all());
+{
+    $question = Subject::findOrFail($id);
+
+    if ($question) {
+        if ($request->file('image')) {
+            if ($question->image) {
+                Storage::disk('subject_image')->delete($question->image);
+            }
+            $newImage = $this->insertImage($request->name, $request->file('image'), 'Subject_image');
+            $question->update(array_merge($request->all(), ['image' => $newImage]));
+        } else {
+            $question->update($request->all());
+        }
         return response()->json([
-            'message' => 'Update',
+            'message' => 'Updated',
             'status' => Response::HTTP_NO_CONTENT
         ]);
+    } else {
+        return response()->json([
+            'message' => 'Not Found',
+            'status' => Response::HTTP_NOT_FOUND
+        ]);
     }
+}
 
     public function destory($id)
     {

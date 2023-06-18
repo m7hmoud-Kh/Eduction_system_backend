@@ -45,6 +45,8 @@ Route::group([
     Route::post('/logout', [StudentController::class, 'logout']);
     Route::get('/students/refresh', [StudentController::class, 'refresh']);
     Route::post('/students/{id}', [StudentController::class, 'update']);
+    Route::post('/password_student', [StudentController::class, 'changePassword']);
+
 
     Route::post('/register-classroom', [ClassRoomStudentController::class, 'registerNow']);
 

@@ -65,16 +65,25 @@ class StudentController extends Controller
             return response()->json($validator->errors(), 400);
         }
         $newImage = $this->insertImage($request->f_name, $request->national_id_card, 'Student_image/');
-        $studnet = Student::create(array_merge(
+        Student::create(array_merge(
             $validator->validated(),
             [
             'password' => Hash::make($request->password),
             'national_id_card' => $newImage
             ]
         ));
+        $attempt = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        if (! $token = auth('student')->attempt($attempt)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+
         return response()->json([
             'message' => 'Student successfully registered',
-            'student' => new StudentResource($studnet)
+            'student' => $this->createNewToken($token)
         ], Response::HTTP_CREATED);
     }
 

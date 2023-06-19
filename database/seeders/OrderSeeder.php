@@ -28,6 +28,9 @@ class OrderSeeder extends Seeder
                 'shipping'=>rand(1,50),
                 'tax'=>rand(1,50),
                 'total'=>rand(1,1000),
+                'expire_month'=>Str::random(10),
+                'expire_year'=>Str::random(10),
+                'cvc'=> rand(1234,9999),
                 'status' => 1,
                 'student_id'=>$ids[rand(0,count($ids)-1)]
                 

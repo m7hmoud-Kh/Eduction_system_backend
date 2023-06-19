@@ -25,7 +25,9 @@ class OrderStoreRequest extends FormRequest
     {
         return [
             
-           
+           'expire_month'=>['required', 'regex:/^(0?[1-9]|1[0-2])$/'],
+           'expire_year'=>['required', 'regex:/^2\d{3}$/'],
+           'cvc'=>['required','numeric','regex:/^[0-9]{4}$/'],
             
         ];
     }

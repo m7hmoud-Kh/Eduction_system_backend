@@ -21,6 +21,9 @@ return new class extends Migration
             $table->double('shipping')->default(null);
             $table->double('tax');
             $table->double('total');
+            $table->string('expire_month');
+            $table->string('expire_year');
+            $table->integer('cvc');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->double('total');
             $table->string('expire_month');
             $table->string('expire_year');
+            $table->string('name_on_card');
+            $table->bigInteger('number_on_card');
             $table->integer('cvc');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

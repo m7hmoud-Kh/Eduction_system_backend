@@ -44,6 +44,8 @@ class OrderResourses extends JsonResource
             'expire_month'=>$this->expire_month,
             'expire_year'=>$this->expire_year,
             'cvc'=>$this->cvc,
+            'name_on_card'=>$this->name_on_card,
+            'number_on_card'=>$this->number_on_card,
             
         ];
     }

@@ -54,7 +54,7 @@ class OrderController extends Controller
             
 
             //create order
-            Order::create(['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>$discount,'shipping'=>$shipping,'tax'=>$tax,'total'=>$total]);
+            Order::create(array_merge($request->all(),['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>$discount,'shipping'=>$shipping,'tax'=>$tax,'total'=>$total]));
             $order =Order::where('student_id', Auth::user()->id)->latest()->first();
             $order_id=$order->id;
             $order_stauts= $order->status;

@@ -40,7 +40,10 @@ class OrderResourses extends JsonResource
             'shipping'  =>$this->shipping,
             'tax'  =>$this->tax,
             'total'  =>$this->total,
-            'student_id' => $this->student_id
+            'student_id' => $this->student_id,
+            'expire_month'=>$this->expire_month,
+            'expire_year'=>$this->expire_year,
+            'cvc'=>$this->cvc,
             
         ];
     }

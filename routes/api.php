@@ -84,6 +84,12 @@ Route::group([
     Route::post('ubdate-cart', [CartController::class, 'update']);
     Route::delete('delete-cart', [CartController::class, 'destroy']);
     Route::delete('delete_product/{proudct_id}', [CartController::class, 'delete_product_in_cart']);
+    Route::post('add-item-to-wishlist', [CartController::class, 'store_in_wish_list']);
+    Route::get('show-wish-list', [CartController::class, 'show_wish_list']);
+    Route::delete('delete-whish-list', [CartController::class, 'delete_whish_list']);
+    Route::delete('delete-product-in-wish-list/{proudct_id}', [CartController::class, 'delete_product_in_wish_list']);
+    Route::post('forward-to-cart/{product_id}', [CartController::class, 'forward_to_cart']);
+    
 });
 
 //student in classRoom must check if student already registered in classRoom Or not

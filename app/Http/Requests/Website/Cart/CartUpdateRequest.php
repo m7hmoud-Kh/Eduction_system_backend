@@ -28,7 +28,7 @@ class CartUpdateRequest extends FormRequest
             
             'product_id'=>['required','numeric'],
             'quantity'=>['required','numeric','min:1'],
-            'status' => ['required', Rule::in(1,2)],
+            
         ];
     }
 }

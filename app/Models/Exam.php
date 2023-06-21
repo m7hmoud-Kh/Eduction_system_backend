@@ -29,6 +29,10 @@ class Exam extends Model
         return $this->belongsTo(ClassRoom::class);
     }
 
+    public function examResult()
+    {
+        return $this->hasMany(ExamResult::class);
+    }
     public function examDateFormate($examDate)
     {
         $date = new DateTime($examDate);

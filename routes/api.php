@@ -36,7 +36,7 @@ Route::get('/classrooms-subject/{branch_id}/{subject_id}', [
     ClassRoomController::class, 'getClassRoomsByBranchIdAndSubjectId'
 ]);
 
-Route::get('get-remaining-students/{classroom_id}', [ClassRoomStudentController::class, 'remainingStudents']);
+
 
 Route::group([
     'middleware' => 'auth:student'
@@ -54,7 +54,7 @@ Route::group([
     Route::get('classrooms-get-by-teacher-id/{id}', [ClassRoomStudentController::class, 'getClassroomsByTeacherId']);
     Route::get('classrooms-get-by-subject-id/{id}', [ClassRoomStudentController::class, 'getClassroomsBySubjectId']);
     Route::get('classrooms-get-subscribed-classrooms/{id}', [ClassRoomStudentController::class, 'subscribedClassrooms']);
-
+    Route::get('get-remaining-students/{classroom_id}', [ClassRoomStudentController::class, 'remainingStudents']);
 
     Route::get('/all-classroom-basedOnAuthStudent/{status}',
     [ClassRoomStudentController::class, 'classroomBasedOnAuthStudent']);
@@ -89,7 +89,7 @@ Route::group([
     Route::delete('delete-whish-list', [CartController::class, 'delete_whish_list']);
     Route::delete('delete-product-in-wish-list/{proudct_id}', [CartController::class, 'delete_product_in_wish_list']);
     Route::post('forward-to-cart/{product_id}', [CartController::class, 'forward_to_cart']);
-    
+
 });
 
 //student in classRoom must check if student already registered in classRoom Or not
@@ -100,6 +100,9 @@ Route::group([
     Route::get('exams/{classroom_id}', [ExamController::class, 'index']);
     Route::get('view-exam/{classroom_id}/{exam_id}', [ExamController::class, 'view']);
     Route::post('submit-exam/{classroom_id}/{exam_id}', [ExamController::class, 'submitExam']);
+    Route::get('show-all-previous-exam/{classroom_id}',[ExamController::class,'showPreviousExam']);
+    Route::get('preview-exam/{classroom_id}/{exam}',[ExamController::class,'PreviewExam']);
+
     Route::get('notes/{classroom_id}', [NoteController::class, 'getNotesByClassroomId']);
     Route::get('lastFiveNotes/{classroom_id}', [NoteController::class, 'getLastFiveNotesLByClassroomId']);
     Route::get('appointments/{classroom_id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);

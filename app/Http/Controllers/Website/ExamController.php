@@ -13,12 +13,18 @@ use App\Http\Resources\ExamResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\QuestionResource;
 use App\Http\Requests\Website\Exam\SubmitExamRequest;
+use App\Http\Resources\ExamResultResource;
+use App\Http\Resources\OptionResource;
+use App\Http\Resources\StudentChoiceResource;
 
 class ExamController extends Controller
 {
     public function index($classRoomId)
     {
-        $exams = Exam::where('class_room_id', $classRoomId)->withCount('questions')->Status()->get();
+        $exams = Exam::whereDoesntHave('examResult', function($q){
+            $q->where('student_id',Auth('student')->user()->id);
+        })
+        ->where('class_room_id', $classRoomId)->withCount('questions')->Status()->OrderByDESC('id')->get();
         if ($exams) {
             return response()->json([
                 'status' => Response::HTTP_OK,
@@ -27,6 +33,55 @@ class ExamController extends Controller
                 ]
             ]);
         }
+    }
+
+    public function showPreviousExam($classRoomId){
+        $exams = ExamResult::where('student_id',Auth('student')->user()->id)
+        ->with(['exam' => function($q)use($classRoomId){
+            $q->where('class_room_id',$classRoomId)->where('end_at','<',now());
+        }])->get();
+
+        if ($exams) {
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data' => [
+                    'allExam' => ExamResultResource::collection($exams),
+                ]
+            ]);
+        }
+    }
+
+    public function PreviewExam($classRoomID,$examId)
+    {
+        $choices = StudentChoice::with(['exam' => function($q)use($classRoomID,$examId){
+            $q->where('class_room_id',$classRoomID)->where('id',$examId);
+        }])->where('exam_id',$examId)
+        ->where('student_id',Auth('student')->user()->id)
+        ->with(['option','question'])
+        ->get();
+
+        if($choices){
+            $exam = Exam::Status()->withCount('questions')->where('end_at','<',now())->find($examId);
+            $questions = Question::with('options')->where('exam_id', $examId)->get();
+
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data' => [
+                    'preview' => [
+                        'exam' => new ExamResource($exam),
+                        'questions' => QuestionResource::collection($questions),
+                        'Choices' => StudentChoiceResource::collection($choices)
+                    ]
+                ]
+            ]);
+        }else{
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'Not Found Student Choices'
+            ]);
+        }
+
+
     }
 
     public function view($classRoomID, $examId)

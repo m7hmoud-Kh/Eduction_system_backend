@@ -14,6 +14,7 @@ class ExamResource extends JsonResource
      */
     public function toArray($request)
     {
+
         $arr = [
             'id' => $this->id,
             'name' => $this->name,
@@ -28,7 +29,7 @@ class ExamResource extends JsonResource
             $newArr = [
                 'count_questions' => $this->questions_count
             ];
-            return array_merge($arr, $newArr);
+            $arr = array_merge($arr, $newArr);
         }
         return $arr;
     }

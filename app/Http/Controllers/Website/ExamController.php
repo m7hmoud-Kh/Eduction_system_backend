@@ -36,9 +36,11 @@ class ExamController extends Controller
     }
 
     public function showPreviousExam($classRoomId){
-        $exams = ExamResult::with(['exam' => function($q)use($classRoomId){
-            $q->where('class_room_id',$classRoomId);
-        }])->where('student_id',Auth('student')->user()->id)->get();
+        $exams = ExamResult::where('student_id',Auth('student')->user()->id)
+        ->with(['exam' => function($q)use($classRoomId){
+            $q->where('class_room_id',$classRoomId)->where('end_at','<',now());
+        }])->get();
+
         if ($exams) {
             return response()->json([
                 'status' => Response::HTTP_OK,
@@ -57,9 +59,9 @@ class ExamController extends Controller
         ->where('student_id',Auth('student')->user()->id)
         ->with(['option','question'])
         ->get();
-        
+
         if($choices){
-            $exam = Exam::Status()->withCount('questions')->find($examId);
+            $exam = Exam::Status()->withCount('questions')->where('end_at','<',now())->find($examId);
             $questions = Question::with('options')->where('exam_id', $examId)->get();
 
             return response()->json([

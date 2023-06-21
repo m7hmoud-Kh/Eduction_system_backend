@@ -23,9 +23,11 @@ class StudentController extends Controller
 
     use Imageable;
 
+    public $regex = '/^[\p{L}\p{Arabic}]+$/u';
+
     public function login(Request $request)
     {
-    	$validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
@@ -45,9 +47,9 @@ class StudentController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'f_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
-            'm_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
-            'l_name' => 'required|string|between:2,100|regex:/^[a-zA-Z]+$/u',
+            'f_name' => 'required|string|between:2,100|regex:'.$this->regex,
+            'm_name' => 'required|string|between:2,100|regex:'.$this->regex,
+            'l_name' => 'required|string|between:2,100|regex:'.$this->regex,
             'phone_number' => ['required','regex:/(01)[0-9]{9}/','size:11'],
             'email' => 'required|string|email|max:100|unique:students|',
             'password' => 'required|string|confirmed|min:6',
@@ -64,6 +66,7 @@ class StudentController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+
         $newImage = $this->insertImage($request->f_name, $request->national_id_card, 'Student_image/');
         Student::create(array_merge(
             $validator->validated(),

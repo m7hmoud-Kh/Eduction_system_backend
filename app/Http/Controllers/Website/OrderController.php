@@ -17,8 +17,11 @@ use App\Http\Requests\Website\Order\OrderUpdateRequest;
 use App\Http\Resources\OrderResourses;
 use App\Http\Resources\TransactionResources;
 use Illuminate\Support\Facades\Auth;
+use App\Http\trait\Orderdata;
 class OrderController extends Controller
 {
+
+    use Orderdata;
     public function index()
     {
         
@@ -47,14 +50,11 @@ class OrderController extends Controller
                 }
                 
             //order attribute    
-            $tax=($sup_total*10)/100;
-            $shipping=10;
-            $discount=10;
-            $total=$sup_total+$shipping+$tax-$discount;
+            $order_data=$this->create_order_atrribute($sup_total);
             
 
             //create order
-            Order::create(array_merge($request->all(),['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>$discount,'shipping'=>$shipping,'tax'=>$tax,'total'=>$total]));
+            Order::create(array_merge($request->all(),['student_id'=>Auth::user()->id,'sub_total'=>$sup_total,'discount'=>$order_data['discount'],'shipping'=>$order_data['shipping'],'tax'=>$order_data['tax'],'total'=>$order_data['total']]));
             $order =Order::where('student_id', Auth::user()->id)->latest()->first();
             $order_id=$order->id;
             $order_stauts= $order->status;

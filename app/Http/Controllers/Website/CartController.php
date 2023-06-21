@@ -11,11 +11,13 @@ use App\Http\Requests\Website\Cart\CartStoreRequest;
 use App\Http\Requests\Website\Cart\CartUpdateRequest;
 use App\Http\Resources\CartResources;
 use Illuminate\Support\Facades\Auth;
+use App\Http\trait\Orderdata;
 
 class CartController extends Controller
 {
  
-   
+   use Orderdata;
+
     public function store(CartStoreRequest $request){
 
             //select product
@@ -79,16 +81,23 @@ class CartController extends Controller
     public function show()
     {
         $carts=Cart::where('student_id', Auth::user()->id)->where('status',1)->get();
-        $total=0;
+        $sub_total=0;
         if ($carts) {
             foreach($carts as $cart){
-                $total=$total+$cart->price;
+                $sub_total=$sub_total+$cart->price;
             }
+
+        $order_data=$this->create_order_atrribute($sub_total);
+
         return response()->json([
             'message' => 'ok',
             'status' => Response::HTTP_OK,
             'data' =>  CartResources::collection($carts),
-            'total'=>$total,
+            'sub_total'=>$sub_total,
+            'tax'=>$order_data['tax'],
+            'shipping'=>$order_data ['shipping'],
+            'discount'=>$order_data ['discount'],
+            'total'=>$order_data ['total'],
         ]);
         
         }else {

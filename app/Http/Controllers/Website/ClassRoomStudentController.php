@@ -77,8 +77,7 @@ class ClassRoomStudentController extends Controller
 
     public function remainingStudents($classroomId)
     {
-        $classRoom = ClassRoom::find($classroomId)->withCount('student')->first();
-
+        $classRoom = ClassRoom::withCount('student')->find($classroomId);
         if ($classRoom) {
             return response()->json([
                 'status' => Response::HTTP_OK,

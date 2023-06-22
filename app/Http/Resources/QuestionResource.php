@@ -14,22 +14,41 @@ class QuestionResource extends JsonResource
      */
     public function toArray($request)
     {
-        $question = [
-            'id' => $this->id,
-            'exam_name' => $this->exam->name,
-            'type' => $this->formateQuestionType($this->type),
-            'question' => $this->question,
-            'point' => $this->point,
-            'image' => 'Question_image/' . $this->image,
-            'explanation' => $this->explanation,
-        ];
+        if ($this->image) {
+            $question = [
+                'id' => $this->id,
+                'exam_name' => $this->exam->name,
+                'type' => $this->formateQuestionType($this->type),
+                'question' => $this->question,
+                'point' => $this->point,
+                'image' => 'Question_image/' . $this->image,
+                'explanation' => $this->explanation,
+            ];
 
-        if ($this->options) {
-            return array_merge($question, [
-                'options' => OptionResource::collection($this->options)
-            ]);
-        }else {
-            return $question;
+            if ($this->options) {
+                return array_merge($question, [
+                    'options' => OptionResource::collection($this->options)
+                ]);
+            } else {
+                return $question;
+            }
+        }else{
+            $question = [
+                'id' => $this->id,
+                'exam_name' => $this->exam->name,
+                'type' => $this->formateQuestionType($this->type),
+                'question' => $this->question,
+                'point' => $this->point,
+                'explanation' => $this->explanation,
+            ];
+
+            if ($this->options) {
+                return array_merge($question, [
+                    'options' => OptionResource::collection($this->options)
+                ]);
+            }else {
+                return $question;
+            }
         }
     }
 }

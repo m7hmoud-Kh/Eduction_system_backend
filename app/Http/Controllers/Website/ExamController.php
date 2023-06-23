@@ -36,10 +36,6 @@ class ExamController extends Controller
     }
 
     public function showPreviousExam($classRoomId){
-        // $exams = ExamResult::where('student_id',Auth('student')->user()->id)
-        // ->with(['exam' => function($q)use($classRoomId){
-        //     $q->where('class_room_id',$classRoomId)->where('end_at','<',now());
-        // }])->get();
         $exams= Exam::with(['examResult'=>function($q){
             $q->where('student_id',Auth('student')->user()->id);
         }])->withSum('questions','point')

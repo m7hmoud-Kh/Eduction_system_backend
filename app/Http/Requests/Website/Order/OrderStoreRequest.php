@@ -29,7 +29,7 @@ class OrderStoreRequest extends FormRequest
            'expire_year'=>['required', 'regex:/^2\d{3}$/'],
            'cvc'=>['required','numeric','regex:/^[0-9]{3}$/'],
            'name_on_card'=>['required','string'],
-           'number_on_card'=>'required|digits:11',
+           'number_on_card'=>'required|digits:16',
             
         ];
     }

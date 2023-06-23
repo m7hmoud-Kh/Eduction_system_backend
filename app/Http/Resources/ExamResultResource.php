@@ -14,12 +14,6 @@ class ExamResultResource extends JsonResource
      */
     public function toArray($request)
     {
-        if($this->exam !== null){
-            return [
-                'total_score' => $this->total_score,
-                'submit_at' => $this->examDateFormate($this->created_at),
-                'exam' => $this->exam
-            ];
-        }
+        Parent::toArray($request);
     }
 }

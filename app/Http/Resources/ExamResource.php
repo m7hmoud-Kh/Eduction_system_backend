@@ -31,6 +31,21 @@ class ExamResource extends JsonResource
             ];
             $arr = array_merge($arr, $newArr);
         }
+        if ($this->questions_sum_point !== null) {
+            $newArr = [
+                'questions_sum_point' => number_format($this->questions_sum_point,2)
+            ];
+            $arr = array_merge($arr, $newArr);
+        }
+        if ($this->examResult !== null) {
+            $newArr = [
+                'Result' => [
+                    "total_score" => $this->examResult[0]->total_score,
+                    'submit_at' => $this->examDateFormate($this->examResult[0]->created_at)
+                ]
+            ];
+            $arr = array_merge($arr, $newArr);
+        }
         return $arr;
     }
 }

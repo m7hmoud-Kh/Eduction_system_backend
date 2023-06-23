@@ -36,16 +36,28 @@ class ExamController extends Controller
     }
 
     public function showPreviousExam($classRoomId){
-        $exams = ExamResult::where('student_id',Auth('student')->user()->id)
-        ->with(['exam' => function($q)use($classRoomId){
-            $q->where('class_room_id',$classRoomId)->where('end_at','<',now());
-        }])->get();
+        // $exams = ExamResult::where('student_id',Auth('student')->user()->id)
+        // ->with(['exam' => function($q)use($classRoomId){
+        //     $q->where('class_room_id',$classRoomId)->where('end_at','<',now());
+        // }])->get();
+        $exams= Exam::with(['examResult'=>function($q){
+            $q->where('student_id',Auth('student')->user()->id);
+        }])->withSum('questions','point')
+        ->whereIn('id', function ($query){
+            $query->select('exam_id')
+                ->from('exam_results')
+                ->where('student_id', Auth('student')->user()->id);
+        })
+        ->withCount('questions')
+        ->where('class_room_id',$classRoomId)
+        ->where('end_at','<',now())->get();
 
+        // dd($exams);
         if ($exams) {
             return response()->json([
                 'status' => Response::HTTP_OK,
                 'data' => [
-                    'allExam' => ExamResultResource::collection($exams),
+                    'allExam' => ExamResource::collection($exams),
                 ]
             ]);
         }

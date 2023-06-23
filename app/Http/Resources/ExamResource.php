@@ -25,6 +25,7 @@ class ExamResource extends JsonResource
             'type' => $this->type ? 'Prerequest Exam':'Normal Exam' ,
             'classroom_name' => $this->classRoom->name,
         ];
+
         if ($this->questions_count !== null) {
             $newArr = [
                 'count_questions' => $this->questions_count
@@ -38,13 +39,18 @@ class ExamResource extends JsonResource
             $arr = array_merge($arr, $newArr);
         }
         if ($this->examResult !== null) {
-            $newArr = [
-                'Result' => [
-                    "total_score" => $this->examResult[0]->total_score,
-                    'submit_at' => $this->examDateFormate($this->examResult[0]->created_at)
-                ]
-            ];
-            $arr = array_merge($arr, $newArr);
+
+            try {
+                $newArr = [
+                    'Result' => [
+                        "total_score" => $this->examResult[0]->total_score,
+                        'submit_at' => $this->examDateFormate($this->examResult[0]->created_at)
+                    ]
+                ];
+                $arr = array_merge($arr, $newArr);
+            } catch (\Exception $e) {
+                return $arr;
+            }
         }
         return $arr;
     }

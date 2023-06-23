@@ -32,7 +32,7 @@ class StudentResource extends JsonResource
             'brith_day' => $this->year.'-'.$this->month.'-'.$this->day,
             'acedemic_year' => [$this->acedemic_year, $this->yearNameFormat($this->acedemic_year)],
             'division' => [$this->division, $this->divisionNameFormat($this->division)],
-            'national_id_card' => 'Subject_image/'.$this->national_id_card,
+            'national_id_card' => 'Student_image/'.$this->national_id_card,
             'governorate_id' => [$this->governorate_id, $gov->name] ,
             'created_at' => $date->format('Y-m-d h:i:s')
         ];

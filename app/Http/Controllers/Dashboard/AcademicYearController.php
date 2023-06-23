@@ -15,7 +15,7 @@ class AcademicYearController extends Controller
 {
     public function index()
     {
-        $allAcademicYears = AcademicYear::all();
+        $allAcademicYears = AcademicYear::latest()->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,

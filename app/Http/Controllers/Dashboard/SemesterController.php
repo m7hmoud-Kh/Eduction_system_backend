@@ -16,7 +16,7 @@ class SemesterController extends Controller
 {
     public function index()
     {
-        $allSemesters = Semester::all();
+        $allSemesters = Semester::latest()->get();
         return response()->json([
             'message' => 'Ok',
             'status' => Response::HTTP_OK,

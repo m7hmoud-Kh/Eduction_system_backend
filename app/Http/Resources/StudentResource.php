@@ -42,7 +42,7 @@ class StudentResource extends JsonResource
                 'attendances' => new AttendanceResource($this->attendance[0])
             ]);
         }else {
-            return $studentInfo;
+            return mb_convert_encoding($studentInfo, 'UTF-8', 'UTF-8');
         }
 
     }

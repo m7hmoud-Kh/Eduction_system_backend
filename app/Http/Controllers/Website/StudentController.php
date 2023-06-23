@@ -23,7 +23,7 @@ class StudentController extends Controller
 
     use Imageable;
 
-    public $regex = '/^[\p{L}\p{Arabic}]+$/u';
+    public $regex = '/^[\p{Arabic} ]+$/u';
 
     public function login(Request $request)
     {
@@ -63,6 +63,9 @@ class StudentController extends Controller
             'governorate_id' => ['required']
         ]);
 
+
+
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
@@ -79,6 +82,7 @@ class StudentController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
+
         if (! $token = auth('student')->attempt($attempt)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -87,7 +91,8 @@ class StudentController extends Controller
         return response()->json([
             'message' => 'Student successfully registered',
             'student' => $this->createNewToken($token)
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_CREATED)->header('Content-Type', 'application/json; charset=utf-8');
+
     }
 
     /**

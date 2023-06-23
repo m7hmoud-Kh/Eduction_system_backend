@@ -25,9 +25,9 @@ class StudentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'f_name' => 'required|string|between:2,100|regex:/^[\p{Arabic}\p{L}]+$/u',
-            'm_name' => 'required|string|between:2,100|regex:/^[\p{Arabic}\p{L}]+$/u',
-            'l_name' => 'required|string|between:2,100|regex:/^[\p{Arabic}\p{L}]+$/u',
+            'f_name' => 'required|string|between:2,100|regex:/^[\p{Arabic} ]+$/u',
+            'm_name' => 'required|string|between:2,100|regex:/^[\p{Arabic} ]+$/u',
+            'l_name' => 'required|string|between:2,100|regex:/^[\p{Arabic} ]+$/u',
             'phone_number' => ['required','regex:/(01)[0-9]{9}/','size:11'],
             'email' => 'required|string|email|max:100|unique:students,id,:'.$this->id,
             'guardian_number' => ['required','regex:/(01)[0-9]{9}/','size:11','different:phone_number'],

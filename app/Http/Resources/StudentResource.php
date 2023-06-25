@@ -38,9 +38,20 @@ class StudentResource extends JsonResource
         ];
 
         if (isset($this->attendance[0]->attendance_date)) {
-            return array_merge($studentInfo, [
-                'attendances' => new AttendanceResource($this->attendance[0])
-            ]);
+            try {
+                $arr = array_merge($studentInfo, [
+                    'attendances' => [
+                        'attendance_date' => $this->attendance[0]->attendance_date,
+                        'status' => [
+                            $this->attendance[0]->status,
+                            $this->FormatStatusAttendance($this->attendance[0]->status)
+                        ]
+                    ]
+                ]);
+                return mb_convert_encoding($arr,'UTF-8');
+            } catch (\Exception $e) {
+                return mb_convert_encoding($arr, 'UTF-8', 'UTF-8');
+            }
         }else {
             return mb_convert_encoding($studentInfo, 'UTF-8', 'UTF-8');
         }

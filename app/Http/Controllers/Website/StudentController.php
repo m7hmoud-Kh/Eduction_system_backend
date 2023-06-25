@@ -136,7 +136,7 @@ class StudentController extends Controller
                     ['national_id_card' => $newImage]
                 ));
             }else {
-                $student->update($request->all());
+                $student->update($request->except('national_id_card'));
             }
             return response()->json([
                 'message' => 'Student Updated Successfully..',

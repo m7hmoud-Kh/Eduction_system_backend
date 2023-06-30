@@ -35,7 +35,7 @@ class ClassRoomStudentController extends Controller
                 ]);
                 return response()->json([
                     'status' => Response::HTTP_OK,
-                    'message' => 'Register in Classroom Successfully'
+                    'message' => 'تم الاشتراك فى الفصل بنجاح'
                 ]);
             }
         }
@@ -64,7 +64,7 @@ class ClassRoomStudentController extends Controller
             $this->getStudentObject(Auth('student')->user()->id)->classRoom()->detach($request->classroom_id);
             return response()->json([
                 'status' => Response::HTTP_OK,
-                'message' => 'unsubscribe in Classroom Successfully'
+                'message' => 'تم الغاء الاشتراك فى الفصل بنجاح'
             ]);
         } else {
             return response()->json([
@@ -145,8 +145,8 @@ class ClassRoomStudentController extends Controller
     {
         $allClassroomBasedOnStatus = ClassRoom::whereHas('student', function ($query) use ($status) {
             return $query
-            ->where('classroom_student.student_id', Auth::user('student')->id)
-            ->where('classroom_student.status', $status);
+                ->where('classroom_student.student_id', Auth::user('student')->id)
+                ->where('classroom_student.status', $status);
         })->get();
         return response()->json([
             'status' => Response::HTTP_OK,

@@ -18,9 +18,7 @@ use App\Http\Controllers\Website\TransactionController;
 use App\Http\Controllers\Dashboard\AttachmentController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Website\ClassRoomStudentController;
-
-
-
+use App\Http\Controllers\Website\LessonController;
 
 Route::post('/register', [StudentController::class, 'register']);
 Route::post('/login', [StudentController::class, 'login']);
@@ -108,6 +106,11 @@ Route::group([
     Route::get('appointments/{classroom_id}', [AppointmentController::class, 'getAppointmentsByClassroomId']);
     Route::get('get-teachers/{classroom_id}', [TeacherController::class, 'getTeachersByClassroomId']);
     Route::get('attachments/{classroom_id}', [AttachmentController::class, 'getAttachmentsByClassroomId']);
+
+
+    Route::get('lessons/{classroom_id}', [LessonController::class,'index']);
+    Route::get('lessons/{classroom_id}/{lesson_id}', [LessonController::class,'show']);
+
 });
 
 

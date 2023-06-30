@@ -25,7 +25,7 @@ use App\Http\Controllers\Dashboard\AttachmentController;
 use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\ClassRoomStudentController;
-
+use App\Http\Controllers\Dashboard\LessonController;
 
 Route::group([
     'middleware' => 'api',
@@ -274,5 +274,14 @@ Route::group([
     Route::post('options/{questionId}', [OptionController::class, 'store']);
     Route::get('options_get_by_question_id/{id}', [OptionController::class, 'getOptionsByQuestionId']);
     Route::delete('options/{questionId}', [OptionController::class, 'destory']);
+});
+
+Route::group([
+    'middleware' => ['auth', 'role:assistant'],
+], function () {
+    Route::post('lessons',[LessonController::class,'store']);
+    Route::get('lessons/{classRoom_id}',[LessonController::class,'index']);
+    Route::post('lessons/{lesson_id}',[LessonController::class,'update']);
+    Route::delete('lessons/{lesson_id}',[LessonController::class,'destory']);
 });
 
